@@ -2,10 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { ChartComponent } from './chart/chart.component';
+import { SeriesComponent } from './chart/series.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChartComponent,
+    SeriesComponent
   ],
   imports: [
     BrowserModule
