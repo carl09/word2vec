@@ -1,0 +1,254 @@
+[
+  {
+    "code": "chain",
+    "name": "Shimano 11 Speed Chain",
+    "img": "assets/products/Dura-Ace-Chain-xtr.jpg",
+    "unitPrice": 52.68
+  },
+  {
+    "code": "disc",
+    "name": "Hope Floating Disc",
+    "img":
+      "assets/products/Hope-Road-Floating-Disc-Internal-Blue-NotSet-HBSP3611606FB.jpg",
+    "unitPrice": 72.59
+  },
+  {
+    "code": "tube",
+    "name": "Vittoria Inner Tube",
+    "img": "assets/products/vittoria-inner-tube-green.jpg",
+    "unitPrice": 4.99
+  },
+  {
+    "code": "pump",
+    "name": "Lezyne Pressure Drive Pump",
+    "img": "assets/products/Lezyne-Pressure-Drive-Pump-Internal-Blue-L-1-MP-PRSDR-V2S10U.jpg",
+    "unitPrice": 38
+  },
+
+  {
+    "code": "road-pedals",
+    "name": "Shimano Ultegra R8000 Carbon SPD-SL Pedals",
+    "img": "assets/products/pdr8000.jpg",
+    "unitPrice": 179.99
+  },
+  {
+    "code": "road-chainset",
+    "name": "Shimano Dura Ace R9100 Chainset",
+    "img": "assets/products/Dura-Ace-R9100-Chainset.jpg",
+    "unitPrice": 537.99
+  },
+  {
+    "code": "road-front-derailleur",
+    "name": "Shimano Ultegra R8000 Front Derailleur",
+    "img": "assets/products/fdr8000f.jpg",
+    "unitPrice": 60
+  },
+  {
+    "code": "road-rear-derailleur",
+    "name": "Shimano Dura-Ace Di2 R9150 Rear Derailleur",
+    "img": "assets/products/rdr9150ss.jpg",
+    "unitPrice": 610
+  },
+  {
+    "code": "road-wheels",
+    "name": "Fulcrum Racing Zero C17 Clincher Wheelset",
+    "img": "assets/products/Fulcrum-Racing-Zero-Wheelset.jpg",
+    "unitPrice": 1445.49
+  },
+  {
+    "code": "road-tyre",
+    "name": "Continental Grand Prix 4000S II Tyre",
+    "img": "assets/products/Continental-4000S-II-Road-Tyre.jpg",
+    "unitPrice": 51.99
+  },
+
+  {
+    "code": "mtb-pedals",
+    "name": "Crank Brothers Mallet 2 Pedals",
+    "img": "assets/products/4265-11003-thickbox.jpg",
+    "unitPrice": 124.08
+  },
+  {
+    "code": "mtb-chainset",
+    "name": "e.thirteen TRS AM Single Crankset",
+    "img": "assets/products/prod111802_Black_NE_01.jpg",
+    "unitPrice": 107.14
+  },
+  {
+    "code": "mtb-rear-derailleur",
+    "name": "Shimano XT M8000 Shadow+ 11 Speed Rear Mech",
+    "img": "assets/products/shimano-m8000-rear-mech-gs.jpg",
+    "unitPrice": 118.80
+  },
+  {
+    "code": "mtb-dropper",
+    "name": "Thomson Elite Covert Dropper Seatpost",
+    "img": "assets/products/Thomson-Elite-Covert-Dropper-Seatpost-Seat-Posts-Black-NotSet-THO-DP-E104.jpg",
+    "unitPrice": 520
+  },
+  {
+    "code": "mtb-wheels",
+    "name": "Spank Oozy Trail 395+ Boost MTB Wheelset",
+    "img": "assets/products/Spank-Oozy-Trail-395-Boost-MTB-Wheelset-Internal-Green-2017-C08T3913226ASPK.jpg",
+    "unitPrice": 747.54
+  },
+  {
+    "code": "mtb-tyres",
+    "name": "Continental X-King MTB Tyre",
+    "img": "assets/products/Continental-X-King-MTB-Tyre-MTB-Off-Road-Tyres-Black-2017-1501370000.jpg",
+    "unitPrice": 34
+  },
+  {
+    "code": "bottle",
+    "name": "Science in Sport 800ml Water Bottle",
+    "img": "assets/products/product_sis_800ml_bottle_768x768.jpg",
+    "unitPrice": 3.27
+  },
+  {
+    "code": "helmet",
+    "name": "Helmet",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "front-light",
+    "name": "Front Light",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "rear-light",
+    "name": "Rear Light",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "glasses",
+    "name": "Glasses",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+
+  {
+    "code": "male-road-top-1",
+    "name": "Top 1",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-road-top-2",
+    "name": "Top 2",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-road-shorts-1",
+    "name": "Shorts 1",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-road-shorts-2",
+    "name": "Shorts 2",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-road-shoes",
+    "name": "Shoes",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-mtb-top-1",
+    "name": "Top 1",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-mtb-top-2",
+    "name": "Top 2",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-mtb-shorts-1",
+    "name": "Shorts 1",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-mtb-shorts-2",
+    "name": "Shorts 2",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "male-mtb-shoes",
+    "name": "Shoes",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+
+
+  {
+    "code": "female-road-top-1",
+    "name": "Top 1",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-road-top-2",
+    "name": "Top 2",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-road-shorts-1",
+    "name": "Shorts 1",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-road-shorts-2",
+    "name": "Shorts 2",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-road-shoes",
+    "name": "Shoes",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-mtb-top-1",
+    "name": "Top 1",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-mtb-top-2",
+    "name": "Top 2",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-mtb-shorts-1",
+    "name": "Shorts 1",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-mtb-shorts-2",
+    "name": "Shorts 2",
+    "img": "assets/products/",
+    "unitPrice": 0
+  },
+  {
+    "code": "female-mtb-shoes",
+    "name": "Shoes",
+    "img": "assets/products/",
+    "unitPrice": 0
+  }
+]

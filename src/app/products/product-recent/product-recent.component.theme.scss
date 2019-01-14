@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+// mixin name will be used in main style.scss
+@mixin product-recent-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  //   $warn: map-get($theme, accent);
+  //   $foreground: map-get($theme, foreground);
+  //   // $background: map-get($theme, background);
+
+  app-product-recent {
+    border-bottom-color: mat-color($accent, A400);
+  }
+}

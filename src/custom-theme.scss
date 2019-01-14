@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@import './app/products/product-list/product-list.component.theme.scss';
+@import './app/products/product-detail/product-detail.component.theme.scss';
+@import './app/products/product-recent/product-recent.component.theme.scss';
+@import './app/cart/cart.component.theme.scss';
+@import './app/app.component.theme.scss';
+
+@include mat-core();
+
+$custom-theme-primary: mat-palette($mat-deep-purple);
+$custom-theme-accent: mat-palette($mat-deep-orange, A200, A100, A400);
+$custom-theme-warn: mat-palette($mat-red);
+
+$custom-theme: mat-light-theme(
+  $custom-theme-primary,
+  $custom-theme-accent,
+  $custom-theme-warn
+);
+
+@mixin custom-theme($theme) {
+  @include app-component-theme($theme);
+  @include product-list-component-theme($theme);
+  @include product-detail-component-theme($theme);
+  @include product-recent-component-theme($theme);
+  @include cart-component-theme($theme);
+}
+@include angular-material-theme($custom-theme);
+@include custom-theme($custom-theme);

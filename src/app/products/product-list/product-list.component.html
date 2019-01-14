@@ -1,0 +1,16 @@
+<div class="content">
+
+    <app-product-recent *ngIf="(productViewed$ | async)?.length" [productViewed]="productViewed$ | async"></app-product-recent>
+
+    <div class="product-grid-container">
+        <div *ngFor="let p of products$ | async">
+            <div class="product-item-wrapper">
+                <div class="product-image-container">
+                    <a class="product-image" [ngStyle]="{ 'background-image': 'url(' + p.img +')'}" [routerLink]="['/products', p.code]"></a>
+                </div>
+                <a class="product-heading" [routerLink]="['/products', p.code]">{{ p.name }}</a>
+                <div class="product-price">{{ p.price | appCurrency:p.currency }}</div>
+            </div>
+        </div>
+    </div>
+</div>

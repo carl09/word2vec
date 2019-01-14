@@ -1,0 +1,7 @@
+<ul>
+    <li class="recent-product-container" *ngFor="let p of productViewed" [routerLink]="['/products', p.code]">
+        <div class="recent-product-image" [ngStyle]="{ 'background-image': 'url(' + p.img +')'}">
+        </div>
+        <div>{{ p.name }}</div>
+    </li>
+</ul>

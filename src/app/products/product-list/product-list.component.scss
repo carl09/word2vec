@@ -1,0 +1,62 @@
+$min-cell: 250px;
+$max-cell: 300px;
+$cell-spcing: 20px;
+
+.product-grid-container {
+  display: grid;
+  grid-template-columns: minmax($min-cell, $max-cell);
+  grid-gap: 10px;
+  padding: 10px;
+
+  @media screen and (min-width: (($min-cell + $cell-spcing) * 2)) {
+    grid-template-columns: minmax($min-cell, $max-cell) minmax(
+        $min-cell,
+        $max-cell
+      );
+  }
+  @media screen and (min-width: (($min-cell + $cell-spcing) * 3)) {
+    grid-template-columns:
+      minmax($min-cell, $max-cell) minmax($min-cell, $max-cell)
+      minmax($min-cell, $max-cell);
+  }
+  @media screen and (min-width: (($min-cell + $cell-spcing) * 4)) {
+    grid-template-columns:
+      minmax($min-cell, $max-cell) minmax($min-cell, $max-cell)
+      minmax($min-cell, $max-cell) minmax($min-cell, $max-cell);
+  }
+}
+.product-grid-container > div {
+  text-align: center;
+  text-align: left;
+  border-width: 1px;
+  border-style: solid;
+}
+.product-item-wrapper {
+  padding: 10px;
+}
+.product-heading {
+  font-size: 16px;
+  padding-left: 10px;
+  text-decoration: none;
+}
+.product-price {
+  font-size: 22px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.product-image-container {
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}

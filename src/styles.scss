@@ -1,0 +1,16 @@
+@import './custom-theme';
+
+body {
+  margin: 0;
+}
+
+.content {
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-flex {
+  @extend .content;
+  display: flex;
+}
