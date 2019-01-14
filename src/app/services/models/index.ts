@@ -1,10 +1,6 @@
 import { Subscription } from 'rxjs';
 import { currencyTypes } from './currency.models';
-import {
-  ActionType,
-  createActionUnsubscribeKey,
-  WorkerActions,
-} from './worker-action.model';
+import { ActionType, createActionUnsubscribeKey, WorkerActions } from './worker-action.model';
 
 export * from './worker-action.model';
 export * from './user.model';
@@ -40,4 +36,13 @@ export interface ICartSummary {
   itemPrice: number;
   totalPrice: number;
   currency: currencyTypes;
+}
+
+export interface ICartSave {
+  sex: string;
+  style: string;
+  products: Array<{
+    productCode: string;
+    qty: number;
+  }>;
 }

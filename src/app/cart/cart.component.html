@@ -1,28 +1,59 @@
 <div class="content">
-    <div class="mat-title">Cart</div>
-    <table *ngIf="summary$" class="mat-table mat-elevation-z4">
-        <thead>
-            <tr class="mat-header-row">
-                <th class="mat-header-cell">Name</th>
-                <th class="mat-header-cell">Price</th>
-                <th class="mat-header-cell">Qty</th>
-                <th class="mat-header-cell">Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="mat-row" *ngFor="let s of summary$ | async">
-                <td class="mat-cell"><a [routerLink]="['/products', s.productCode]" class="cart-product-name">{{ s.name }}</a></td>
-                <td class="mat-cell">{{ s.itemPrice | appCurrency:s.currency }}</td>
-                <td class="mat-cell"><button (click)="remove(s.productCode)" class="cart-remove" mat-button color="accent">-</button> {{ s.qty }} <button (click)="add(s.productCode)" class="cart-add" mat-button color="accent">+</button></td>
-                <td class="mat-cell">{{ s.totalPrice | appCurrency:s.currency }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <div class="mat-title">Cart</div>
+  <table *ngIf="summary$" class="mat-table mat-elevation-z4">
+    <thead>
+      <tr class="mat-header-row">
+        <th class="mat-header-cell">Name</th>
+        <th class="mat-header-cell">Price</th>
+        <th class="mat-header-cell">Qty</th>
+        <th class="mat-header-cell">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="mat-row" *ngFor="let s of (summary$ | async)">
+        <td class="mat-cell">
+          <a [routerLink]="['/products', s.productCode]" class="cart-product-name">{{ s.name }}</a>
+        </td>
+        <td class="mat-cell">{{ s.itemPrice | appCurrency: s.currency }}</td>
+        <td class="mat-cell">
+          <button (click)="remove(s.productCode)" class="cart-remove" mat-button color="accent">
+            -
+          </button>
+          {{ s.qty }}
+          <button (click)="add(s.productCode)" class="cart-add" mat-button color="accent">+</button>
+        </td>
+        <td class="mat-cell">{{ s.totalPrice | appCurrency: s.currency }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-    <div style="display: none">
-    <mat-table>
-            <mat-header-row *cdkHeaderRowDef="[]"></mat-header-row>
-        </mat-table>
-    </div>
+  <div style="display: none">
+    <mat-table> <mat-header-row *cdkHeaderRowDef="[]"></mat-header-row> </mat-table>
+  </div>
+</div>
 
+<div class="content-flex">
+  <form [formGroup]="saveCartForm" (ngSubmit)="saveCart()">
+    <p>
+      <mat-form-field>
+        <mat-select placeholder="Sex" formControlName="sex" required>
+          <mat-option>--</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="male">Male</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-select placeholder="Riding Style" formControlName="style" required>
+          <mat-option>--</mat-option>
+          <mat-option value="road">Road</mat-option>
+          <mat-option value="mtb">Mountain Biking</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <button type="submit" [disabled]="saveCartForm.pristine" mat-raised-button color="primary">
+      Save
+    </button>
+  </form>
 </div>

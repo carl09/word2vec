@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 
 export const CART_ADD = 'CART_ADD';
 export const CART_REMOVE = 'CART_REMOVE';
+export const CART_REMOVE_ALL = 'CART_REMOVE_ALL';
 
 export interface ICartAddActionPayload {
   productCode: string;
@@ -24,4 +25,9 @@ export class CartRemoveAction implements Action {
   constructor(public payload: ICartRemoveActionPayload) {}
 }
 
-export type cartActions = CartAddAction | CartRemoveAction;
+export class CartRemoveAllAction implements Action {
+  public readonly type = CART_REMOVE_ALL;
+  constructor() {}
+}
+
+export type cartActions = CartAddAction | CartRemoveAction | CartRemoveAllAction;

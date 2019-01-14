@@ -1,7 +1,6 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { ICart } from '../models';
 import * as reducerActions from './actions';
-import { CART_ADD } from './actions/cart.actions';
 
 export const cartReducer: ActionReducer<ICart> = (
   state: ICart = { items: [] },
@@ -12,15 +11,16 @@ export const cartReducer: ActionReducer<ICart> = (
       return addProduct(state, action.payload);
     case reducerActions.CART_REMOVE:
       return removeProduct(state, action.payload);
+    case reducerActions.CART_REMOVE_ALL:
+      return {
+        items: [],
+      };
     default:
       return state;
   }
 };
 
-function addProduct(
-  state: ICart,
-  action: reducerActions.ICartAddActionPayload,
-): ICart {
+function addProduct(state: ICart, action: reducerActions.ICartAddActionPayload): ICart {
   const items = [];
   let exists = false;
   state.items.forEach(x => {
@@ -46,10 +46,7 @@ function addProduct(
   };
 }
 
-function removeProduct(
-  state: ICart,
-  action: reducerActions.ICartAddActionPayload,
-): ICart {
+function removeProduct(state: ICart, action: reducerActions.ICartAddActionPayload): ICart {
   const items = [];
   state.items.forEach(x => {
     if (x.productCode === action.productCode) {
