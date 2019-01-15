@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { CartRemoveAction, CartAddAction, CartRemoveAllAction } from '../services/reducers/actions';
 import { map, take } from 'rxjs/operators';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -21,6 +22,7 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private store: Store<any>,
     private formBuilder: FormBuilder,
+    private http: HttpClient
   ) {}
 
   public ngOnInit(): void {
@@ -70,6 +72,11 @@ export class CartComponent implements OnInit {
         this.addItems(saveData);
 
         console.log(saveData);
+
+        this.http.post('http://localhost:3000/cartData', saveData).subscribe(z => {
+          console.log(z);
+        });
+
         this.store.dispatch(new CartRemoveAllAction());
       });
   }

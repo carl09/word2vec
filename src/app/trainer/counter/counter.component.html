@@ -1,0 +1,14 @@
+<div *ngFor="let user of (users$ | async)">
+  {{ user.label }} | {{ user.count }}
+</div>
+
+<br>
+<br>
+
+<div class="product-wrapper" *ngFor="let product of (products$ | async)">
+  {{ product.code }} | {{ product.count }}
+  <div
+    class="product-image"
+    [ngStyle]="{ 'background-image': 'url(' + product.img + ')' }"
+  ></div>
+</div>

@@ -9,7 +9,7 @@ export const createModel = (encodeNumberLength: number): tf.Sequential => {
     // activation: 'relu', // 'relu',
     //   activation: 'softmax',
     // activation: 'sigmoid',
-    activation: 'elu',
+    activation: 'sigmoid',
     kernelInitializer: 'zeros',
     useBias: true,
   });

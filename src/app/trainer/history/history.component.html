@@ -1,0 +1,8 @@
+<div class="product-wrapper" *ngFor="let item of (items$ | async)">
+  <div class="product-heading">{{ item.sex }} | {{ item.style }}</div>
+  <div
+    *ngFor="let p of item.products"
+    class="product-image"
+    [ngStyle]="{ 'background-image': 'url(' + p.img + ')' }"
+  ></div>
+</div>

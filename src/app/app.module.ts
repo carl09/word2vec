@@ -24,12 +24,14 @@ import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { reducers, IState } from './services/reducers/reducers';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import { TrainerComponent } from './trainer/trainer.component';
 import { UserService } from './services/user-worker.service';
 import { CartService } from './services/cart-worker.service';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './user/login/login.component';
 import { LogoffComponent } from './user/logoff/logoff.component';
+import { MatrixComponent } from './trainer/matrix/matrix.component';
+import { HistoryComponent } from './trainer/history/history.component';
+import { CounterComponent } from './trainer/counter/counter.component';
 
 export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IState>>('Registered Reducers');
 
@@ -42,8 +44,10 @@ export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IState>>('Regi
     CartComponent,
     LoginComponent,
     LogoffComponent,
-    TrainerComponent,
+    HistoryComponent,
     AppCurrencyPipe,
+    MatrixComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,

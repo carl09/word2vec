@@ -1,0 +1,26 @@
+.product-image-container {
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  position: relative;
+  /* If you want text inside of it */
+}
+.product-image {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  // bottom: 0;
+  // right: 0;
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  float: left;
+}
+
+.product-wrapper {
+  height: 120px;
+}
+
+.product-heading {
+  font-weight: bold;
+}
