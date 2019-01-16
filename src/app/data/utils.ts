@@ -1,3 +1,5 @@
+import { ICartSave } from "../services/models";
+
 export interface WindowTrainData {
   data: string;
   left: string;
@@ -83,4 +85,26 @@ export const generateTrainingData = (line: string): WindowTrainData[] => {
   }
 
   return results;
+};
+
+
+export const transformCartToTraining = (
+  cartItem: ICartSave,
+  lookup: { [id: string]: number },
+): TrainData[] => {
+  const result: TrainData[] = [];
+
+  cartItem.products.forEach((x, i) => {
+    for (let index = 0; index < cartItem.products.length; index++) {
+      const label = cartItem.products[index];
+      if (i !== index) {
+        result.push({
+          data: lookup[x.productCode],
+          label: lookup[label.productCode],
+        });
+      }
+    }
+  });
+
+  return result;
 };

@@ -8,6 +8,7 @@ import { IState } from './reducers/reducers';
 import { IProductSummary, IProduct, IUser, IProductViewed } from './models';
 import { currencyTypes, DEFAULT_CURRENCY, convertCurrency } from './models/currency.models';
 import { LoadProductsAction, ViewedProductAction } from './reducers/actions';
+import { environment } from '../../environments/environment';
 
 const selectUser = (state: IState) => state.user;
 const selectProducts = (state: IState) => state.products;
@@ -93,7 +94,7 @@ export class ProductsService {
   }
 
   public loadProducts() {
-    this.http.get('./assets/products.json').subscribe((resp: IProduct[]) => {
+    this.http.get<IProduct[]>(`${environment.hostUrl}products`).subscribe((resp: IProduct[]) => {
       this.store.dispatch(
         new LoadProductsAction({
           products: resp,

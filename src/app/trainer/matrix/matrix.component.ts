@@ -4,9 +4,12 @@ import * as tf from '@tensorflow/tfjs';
 import { removeStopWords, getUniqueWords, TrainData, generateTrainingData } from '../../data/utils';
 import { createModel } from '../../data/model';
 import { IProduct } from '../../services/models';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-matrix',  
+  selector: 'app-matrix',
   templateUrl: './matrix.component.html',
   // styleUrls: ['./trainer.component.scss'],
 })
@@ -15,6 +18,8 @@ export class MatrixComponent implements OnInit {
   canvas1: ElementRef;
 
   public chart1: Chart;
+
+  constructor(private http: HttpClient) {}
 
   public ngOnInit() {
     const ctx1 = this.canvas1.nativeElement.getContext('2d');
@@ -50,49 +55,52 @@ export class MatrixComponent implements OnInit {
   }
 
   private async loadData() {
-    console.log('loading model');
-    const model = await tf.loadModel('http://localhost:3000/assets/cart-1a/model.json');
+    this.http
+      .get<IProduct[]>(`${environment.hostUrl}products`)
+      .pipe(take(1))
+      .subscribe(productsData => {
+        console.log('loading model');
+        tf.loadModel(`${environment.hostUrl}assets/cart-1a/model.json`).then(model => {
+          const weights = model.layers[1].getWeights()[0].dataSync();
+          const bias = model.layers[1].getWeights()[1].dataSync();
 
-    const weights = model.layers[1].getWeights()[0].dataSync();
-    const bias = model.layers[1].getWeights()[1].dataSync();
+          const matrix: Array<{ x: number; y: number }> = [];
 
-    const matrix: Array<{ x: number; y: number }> = [];
+          for (let index = 0; index < weights.length; index++) {
+            const x = weights[index];
+            const y = bias[index]; // weights[index++];
+            console.log(x, y);
+            matrix.push({
+              x,
+              y,
+            });
+          }
 
-    for (let index = 0; index < weights.length; index++) {
-      const x = weights[index];
-      const y = bias[index]; // weights[index++];
-      console.log(x, y);
-      matrix.push({
-        x,
-        y,
+          const products = (productsData as IProduct[]).map(x => x.code);
+          const product2int: { [id: string]: number } = {};
+
+          products.forEach((w, i) => {
+            product2int[w] = i;
+          });
+
+          for (let index = 0; index < products.length; index++) {
+            const element = products[index];
+
+            this.chart1.data.datasets.push({
+              label: element,
+              data: [
+                {
+                  x: matrix[index].x,
+                  y: matrix[index].y,
+                  r: 5,
+                },
+              ],
+            });
+          }
+
+          this.chart1.update();
+        });
       });
-    }
-
-    const productsData = require('./../../../assets/products.json');
-
-    const products = (productsData as IProduct[]).map(x => x.code);
-    const product2int: { [id: string]: number } = {};
-
-    products.forEach((w, i) => {
-      product2int[w] = i;
-    });
-
-    for (let index = 0; index < products.length; index++) {
-      const element = products[index];
-
-      this.chart1.data.datasets.push({
-        label: element,
-        data: [
-          {
-            x: matrix[index].x,
-            y: matrix[index].y,
-            r: 5,
-          },
-        ],
-      });
-    }
-
-    this.chart1.update();
   }
 
   // private async loadData() {

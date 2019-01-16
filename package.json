@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "watch": "ts-node-dev --respawn --transpileOnly build-model.ts",
-    "server": "ts-node-dev --respawn --inspect --transpileOnly ./server.ts"
+    "watch": "ts-node-dev --respawn --transpileOnly ./server/build-model.ts",
+    "server": "ts-node-dev --respawn --inspect --transpileOnly ./server/server.ts"
   },
   "private": true,
   "dependencies": {
