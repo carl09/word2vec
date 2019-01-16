@@ -3,191 +3,222 @@
     "code": "chain",
     "name": "Shimano 11 Speed Chain",
     "img": "assets/products/Dura-Ace-Chain-xtr.jpg",
-    "unitPrice": 52.68
+    "unitPrice": 52.68,
+    "color": "#dfbf9f"
   },
   {
     "code": "disc",
     "name": "Hope Floating Disc",
     "img":
       "assets/products/Hope-Road-Floating-Disc-Internal-Blue-NotSet-HBSP3611606FB.jpg",
-    "unitPrice": 72.59
+    "unitPrice": 72.59,
+    "color": "#d2a679"
   },
   {
     "code": "tube",
     "name": "Vittoria Inner Tube",
     "img": "assets/products/vittoria-inner-tube-green.jpg",
-    "unitPrice": 4.99
+    "unitPrice": 4.99,
+    "color": "#c68c53"
   },
   {
     "code": "pump",
     "name": "Lezyne Pressure Drive Pump",
     "img": "assets/products/Lezyne-Pressure-Drive-Pump-Internal-Blue-L-1-MP-PRSDR-V2S10U.jpg",
-    "unitPrice": 38
+    "unitPrice": 38,
+    "color": "#ac7339"
   },
 
   {
     "code": "road-pedals",
     "name": "Shimano Ultegra R8000 Carbon SPD-SL Pedals",
     "img": "assets/products/pdr8000.jpg",
-    "unitPrice": 179.99
+    "unitPrice": 179.99,
+    "color": "#ffd9b3"
   },
   {
     "code": "road-chainset",
     "name": "Shimano Dura Ace R9100 Chainset",
     "img": "assets/products/Dura-Ace-R9100-Chainset.jpg",
-    "unitPrice": 537.99
+    "unitPrice": 537.99,
+    "color": "#ffbf80"
   },
   {
     "code": "road-front-derailleur",
     "name": "Shimano Ultegra R8000 Front Derailleur",
     "img": "assets/products/fdr8000f.jpg",
-    "unitPrice": 60
+    "unitPrice": 60,
+    "color": "#ffa64d"
   },
   {
     "code": "road-rear-derailleur",
     "name": "Shimano Dura-Ace Di2 R9150 Rear Derailleur",
     "img": "assets/products/rdr9150ss.jpg",
-    "unitPrice": 610
+    "unitPrice": 610,
+    "color": "#ff8c1a"
   },
   {
     "code": "road-wheels",
     "name": "Fulcrum Racing Zero C17 Clincher Wheelset",
     "img": "assets/products/Fulcrum-Racing-Zero-Wheelset.jpg",
-    "unitPrice": 1445.49
+    "unitPrice": 1445.49,
+    "color": "#e67300"
   },
   {
     "code": "road-tyre",
     "name": "Continental Grand Prix 4000S II Tyre",
     "img": "assets/products/Continental-4000S-II-Road-Tyre.jpg",
-    "unitPrice": 51.99
+    "unitPrice": 51.99,
+    "color": "#b35900"
   },
 
   {
     "code": "mtb-pedals",
     "name": "Crank Brothers Mallet 2 Pedals",
     "img": "assets/products/4265-11003-thickbox.jpg",
-    "unitPrice": 124.08
+    "unitPrice": 124.08,
+    "color": "#ffc2b3"
   },
   {
     "code": "mtb-chainset",
     "name": "e.thirteen TRS AM Single Crankset",
     "img": "assets/products/prod111802_Black_NE_01.jpg",
-    "unitPrice": 107.14
+    "unitPrice": 107.14,
+    "color": "#ff9980"
   },
   {
     "code": "mtb-rear-derailleur",
     "name": "Shimano XT M8000 Shadow+ 11 Speed Rear Mech",
     "img": "assets/products/shimano-m8000-rear-mech-gs.jpg",
-    "unitPrice": 118.80
+    "unitPrice": 118.80,
+    "color":"#ff704d"
   },
   {
     "code": "mtb-dropper",
     "name": "Thomson Elite Covert Dropper Seatpost",
     "img": "assets/products/Thomson-Elite-Covert-Dropper-Seatpost-Seat-Posts-Black-NotSet-THO-DP-E104.jpg",
-    "unitPrice": 520
+    "unitPrice": 520,
+    "color": "#ff471a"
   },
   {
     "code": "mtb-wheels",
     "name": "Spank Oozy Trail 395+ Boost MTB Wheelset",
     "img": "assets/products/Spank-Oozy-Trail-395-Boost-MTB-Wheelset-Internal-Green-2017-C08T3913226ASPK.jpg",
-    "unitPrice": 747.54
+    "unitPrice": 747.54,
+    "color": "#e62e00"
   },
   {
     "code": "mtb-tyres",
     "name": "Continental X-King MTB Tyre",
     "img": "assets/products/Continental-X-King-MTB-Tyre-MTB-Off-Road-Tyres-Black-2017-1501370000.jpg",
-    "unitPrice": 34
+    "unitPrice": 34,
+    "color": "#b32400"
   },
   {
     "code": "bottle",
     "name": "Science in Sport 800ml Water Bottle",
     "img": "assets/products/product_sis_800ml_bottle_768x768.jpg",
-    "unitPrice": 3.27
+    "unitPrice": 3.27,
+    "color": "#d9d9d9"
   },
   {
     "code": "helmet",
     "name": "Kask Mojito X Road Helmet",
     "img": "assets/products/img_1902.jpg",
-    "unitPrice": 199
+    "unitPrice": 199,
+    "color":"#bfbfbf"
   },
   {
     "code": "front-light",
     "name": "Knog PWR 600L",
     "img": "assets/products/Knog-PWR-Road-600-Front-Light.jpg",
-    "unitPrice": 125.80
+    "unitPrice": 125.80,
+    "color": "#a6a6a6"
   },
   {
     "code": "rear-light",
     "name": "Knog Light Blinder R70 Rear",
     "img": "assets/products/Knog-Light-Blinder-Road-R70-Rear-Bike-Rear-Lights-Black-AW17-KNOG-11756.jpg",
-    "unitPrice": 65.95
+    "unitPrice": 65.95,
+    "color":"#8c8c8c"
   },
   {
     "code": "glasses",
     "name": "Oakley Jawbreaker Prizm Ruby",
     "img": "assets/products/Jawbreaker-Prizm-Ruby.jpg",
-    "unitPrice": 241.95
+    "unitPrice": 241.95,
+    "color": "#737373"
   },
 
   {
     "code": "male-road-top-1",
     "name": "Isadore Echelon Jersey",
     "img": "assets/products/Isadore-Echelon-Jersey-Short-Sleeve-Jerseys-Black-8586017376755.jpg",
-    "unitPrice": 224
+    "unitPrice": 224,
+    "color": "#248f24"
   },
   {
     "code": "male-road-top-2",
     "name": "Morvelo Marlé Nth Short Sleeve Jersey",
     "img": "assets/products/Morvelo-Marl-Nth-Short-Sleeve-Jersey-Jerseys-Grey-Grey-AW18-MRLENSMJ-XS.jpg",
-    "unitPrice": 140
+    "unitPrice": 140,
+    "color": "#2eb82e"
   },
   {
     "code": "male-road-shorts-1",
     "name": "Morvelo Stealth Bib Shorts",
     "img": "assets/products/Morvelo-Stealth-Bib-Shorts-Lycra-Cycling-Shorts-Black-White-SS16-STLTHMVMSH-SM.jpg",
-    "unitPrice": 140
+    "unitPrice": 140,
+    "color": "#47d147"
   },
   {
     "code": "male-road-shorts-2",
     "name": "Castelli Premio Bib Shorts",
     "img": "assets/products/Castelli-Premio-Bib-Shorts-Lycra-Cycling-Shorts-Black-Red-SS18-CS170060102.jpg",
-    "unitPrice": 210
+    "unitPrice": 210,
+    "color": "#70db70"
   },
   {
     "code": "male-road-shoes",
     "name": "Giro Empire E70 Knit Road Shoe",
     "img": "assets/products/Giro-Empire-E70-Knit-Road-Shoe-Road-Shoes-Grey-Heather-Highlig-2018-GISEMEG45-9.jpg",
-    "unitPrice": 250
+    "unitPrice": 250,
+    "color": "#99e699"
   },
   {
     "code": "male-mtb-top-1",
     "name": "Endurance Conspiracy Runnin' Down A Dream T Shirt",
     "img": "assets/products/RunninDownADream.jpg",
-    "unitPrice": 31
+    "unitPrice": 31,
+    "color": "#005ce6"
   },
   {
     "code": "male-mtb-top-2",
     "name": "Fox Racing Crass Short Sleeve Airline T-Shirt",
     "img": "assets/products/22075_014_1.jpg",
-    "unitPrice": 35
+    "unitPrice": 35,
+    "color": "#1a75ff"
   },
   {
     "code": "male-mtb-shorts-1",
     "name": "Endura Hummvee II Shorts",
     "img": "assets/products/Endura-Hummvee-II-Shorts-Baggy-Cycling-Shorts-Green-2-SS17-E8064KH-3-9.jpg  ",
-    "unitPrice": 90
+    "unitPrice": 90,
+    "color": "#4d94ff"
   },
   {
     "code": "male-mtb-shorts-2",
     "name": "Race Face Ambush Shorts (SS16)",
     "img": "assets/products/Race-Face-Ambush-Shorts-Baggy-Cycling-Shorts-Flame-SS15-SA601142-0.jpg",
-    "unitPrice": 95
+    "unitPrice": 95,
+    "color": "#80b3ff"
   },
   {
     "code": "male-mtb-shoes",
     "name": "Five Ten Freerider MTB Shoes",
     "img": "assets/products/prod136375_Black-Grey_NE_01.jpg",
-    "unitPrice": 91
+    "unitPrice": 91,
+    "color": "#b3d1ff"
   },
 
 
@@ -195,60 +226,71 @@
     "code": "female-road-top-1",
     "name": "Rapha Women's Classic Jersey",
     "img": "assets/products/Rapha-Women-s-Classic-Jersey-Jerseys-Navy-Hi-Vis-Pink-AW18-WCJ03XXNVPXXS.jpg",
-    "unitPrice": 198
+    "unitPrice": 198,
+    "color": "#7300e6"
   },
   {
     "code": "female-road-top-2",
     "name": "Isadore Women's Woolight Short Sleeve Jersey",
     "img": "assets/products/Isadore-Women-s-Woolight-Short-Sleeve-Jersey-Short-Sleeve-Jerseys-Black-8586017372559.jpg",
-    "unitPrice": 112
+    "unitPrice": 112,
+    "color": "#8c1aff"
   },
   {
     "code": "female-road-shorts-1",
     "name": "Stolen Goat Women's Bodyline One Bib Shorts",
     "img": "assets/products/Stolen-Goat-Women-s-Bodyline-One-Bib-Shorts-Lycra-Cycling-Shorts-Purple-SS17-SH12302.jpg",
-    "unitPrice": 112
+    "unitPrice": 112,
+    "color":"#a64dff"
   },
   {
     "code": "female-road-shorts-2",
     "name": "Alé Women's PRR Camo Bib Shorts",
     "img": "assets/products/Al-Women-s-PRR-Camo-Bib-Shorts-Lycra-Cycling-Shorts-Black-Strawberry-SS18-L07257517-01.jpg",
-    "unitPrice": 129
+    "unitPrice": 129,
+    "color": "#bf80ff"
   },
   {
     "code": "female-road-shoes",
     "name": "Giro Women's Empire ACC Road Shoe",
     "img": "assets/products/giro_s_w-empireacc_whitereflectivemarblegalaxy_34_2_1.jpg",
-    "unitPrice": 320
+    "unitPrice": 320,
+    "color": "#d9b3ff"
   },
   {
     "code": "female-mtb-top-1",
     "name": "Morvelo Women's Homeward T-Shirt",
     "img": "assets/products/womens_homeward_tee.jpg",
-    "unitPrice": 40
+    "unitPrice": 40,
+    "color": "#e600ac"
   },
   {
     "code": "female-mtb-top-2",
     "name": "Morvelo Women's Fiercely T-Shirt",
     "img": "assets/products/Fiercely-Womens.jpg",
-    "unitPrice": 39
+    "unitPrice": 39,
+    "color": "#ff1ac6"
+    
   },
   {
     "code": "female-mtb-shorts-1",
     "name": "7Mesh Women's Glidepath Shorts",
     "img": "assets/products/7Mesh-Women-s-Glidepath-Shorts-Baggy-Cycling-Shorts-Bad-Ash-Grey-SS17-1629-XX-BAG-SM.jpg",
-    "unitPrice": 121
+    "unitPrice": 121,
+    "color": "#ff4dd2"
   },
   {
     "code": "female-mtb-shorts-2",
     "name": "Endura - Women's Hummvee II Shorts",
     "img": "assets/products/Endura-Women-s-Hummvee-Baggy-Shorts-II-Baggy-Cycling-Shorts-Black-E6106BK-2.jpg",
-    "unitPrice": 90
+    "unitPrice": 90,
+    "color": "#ff80df"
   },
   {
     "code": "female-mtb-shoes",
     "name": "Five Ten Womens Freerider Pro MTB Shoes",
     "img": "assets/products/Five-Ten-Women-s-Freerider-Pro-MTB-Shoes-Cycling-Shoes-Solid-Grey-2018-5318065.jpg",
-    "unitPrice": 126
+    "unitPrice": 126,
+    "color": "#ffb3ec"
   }
 ]

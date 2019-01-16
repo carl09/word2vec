@@ -6,6 +6,8 @@ import { generateModel } from './generate-model';
 const app = express();
 const port = 3000;
 
+let UpdatingModel = false;
+
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -36,9 +38,14 @@ app.post('/cartData', (req, res) => {
 
   fs.writeFileSync('./server/assets/cartData.json', JSON.stringify(existing));
 
-  const productsJson = fs.readFileSync('./server/assets/products.json').toString();
+  if (!UpdatingModel) {
+    UpdatingModel = true;
+    const productsJson = fs.readFileSync('./server/assets/products.json').toString();
 
-  generateModel(JSON.parse(productsJson) as IProduct[], existing);
+    generateModel(JSON.parse(productsJson) as IProduct[], existing).then(() => {
+      UpdatingModel = false;
+    });
+  }
 
   res.send(existing);
 });

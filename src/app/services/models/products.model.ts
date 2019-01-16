@@ -4,6 +4,7 @@ export interface IProduct {
   name: string;
   img: string;
   unitPrice: number;
+  color: string;
 }
 
 export interface IProductSummary {

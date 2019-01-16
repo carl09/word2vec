@@ -5,7 +5,10 @@ import { TrainData, transformCartToTraining } from '../src/app/data/utils';
 import { ICartSave } from '../src/app/services/models/index';
 import { createModel } from '../src/app/data/model';
 
-export const generateModel = (productsData: IProduct[], cartItemsData: ICartSave[]): void => {
+export const generateModel = (
+  productsData: IProduct[],
+  cartItemsData: ICartSave[],
+): Promise<any> => {
   const products = productsData.map(x => x.code);
 
   const product2int: { [id: string]: number } = {};
@@ -31,20 +34,31 @@ export const generateModel = (productsData: IProduct[], cartItemsData: ICartSave
     encodeNumberLength,
   );
 
-  model
-    .fit(dataTensor, labelTensor, {
-      epochs: 1000,
-      shuffle: true,
-      callbacks: {
-        onEpochEnd: async (epoch, logs) => {
-          // console.log(epoch, logs.loss);
+  const result = new Promise((resolve, reject) => {
+    model
+      .fit(dataTensor, labelTensor, {
+        epochs: 1000,
+        shuffle: true,
+        batchSize: 50,
+        callbacks: {
+          onEpochEnd: async (epoch, logs) => {
+            // console.log(epoch, logs.loss);
+          },
         },
-      },
-    })
-    .then(() => {
-      dataTensor.dispose();
-      labelTensor.dispose();
+      })
+      .then(() => {
+        dataTensor.dispose();
+        labelTensor.dispose();
 
-      model.save('file://./server/assets/cart-1a');
-    });
+        model.save('file://./server/assets/cart-1a');
+
+        resolve();
+      })
+      .catch(err => {
+        console.error(err);
+        reject(err);
+      });
+  });
+
+  return result;
 };

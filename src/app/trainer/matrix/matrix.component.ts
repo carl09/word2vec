@@ -39,14 +39,25 @@ export class MatrixComponent implements OnInit {
         scales: {
           xAxes: [
             {
-              // display: false,
+              display: true,
+              drawBorder: false
             },
           ],
           yAxes: [
             {
-              // display: true,
+              display: true,
+              drawBorder: false
             },
           ],
+        },
+        tooltips: {
+          bodyFontSize: 20,
+          callbacks: {
+            label: function(tooltipItem, data) {
+              const label = data.datasets[tooltipItem.datasetIndex].label || '';
+              return label;
+            },
+          },
         },
       },
     });
@@ -85,14 +96,16 @@ export class MatrixComponent implements OnInit {
 
           for (let index = 0; index < products.length; index++) {
             const element = products[index];
+            const product = productsData[index];
 
             this.chart1.data.datasets.push({
               label: element,
+              backgroundColor: product.color,
               data: [
                 {
                   x: matrix[index].x,
                   y: matrix[index].y,
-                  r: 5,
+                  r: 20,
                 },
               ],
             });
