@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { currencyTypes } from './currency.models';
-import { ActionType, createActionUnsubscribeKey, WorkerActions } from './worker-action.model';
+import { createActionUnsubscribeKey, WorkerActions } from './worker-action.model';
 
 export * from './worker-action.model';
 export * from './user.model';

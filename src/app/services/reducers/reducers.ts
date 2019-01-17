@@ -1,4 +1,4 @@
-import { Action, ActionReducer, ActionReducerMap } from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 import { ICart, IProduct, IUser } from '../models';
 import { cartReducer } from './cart.reducer';
 import { counterReducer } from './counter.reducer';

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { createSelector, MemoizedSelector, select, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
-import { selectGetCurrency } from './user-worker.service';
-import { currencyTypes, convertCurrency } from './models/currency.models';
+import { Observable } from 'rxjs';
+import { ICart, ICartSummary, IProduct } from './models';
+import { convertCurrency, currencyTypes } from './models/currency.models';
 import { IState } from './reducers/reducers';
-import { IProduct, ICart, ICartSummary } from './models';
+import { selectGetCurrency } from './user.service';
 
 interface IProductForCart {
   name: string;
@@ -13,7 +12,7 @@ interface IProductForCart {
   currency: currencyTypes;
 }
 
-const selectUser = (state: IState) => state.user;
+// const selectUser = (state: IState) => state.user;
 const selectProducts = (state: IState) => state.products;
 const selectCart = (state: IState) => state.cart;
 
@@ -54,10 +53,7 @@ const selectCartTotal: MemoizedSelector<IState, number> = createSelector(
   },
 );
 
-const selectCartSummary: MemoizedSelector<
-  IState,
-  ICartSummary[]
-> = createSelector(
+const selectCartSummary: MemoizedSelector<IState, ICartSummary[]> = createSelector(
   selectProductsForCart,
   selectCart,
   (products: { [id: string]: IProductForCart }, cart: ICart) => {
@@ -80,8 +76,7 @@ const selectCartSummary: MemoizedSelector<
 
 @Injectable()
 export class CartService {
-  constructor(private store: Store<IState>) {
-  }
+  constructor(private store: Store<IState>) {}
 
   public getCartTotal(): Observable<number> {
     return this.store.pipe(select(selectCartTotal));

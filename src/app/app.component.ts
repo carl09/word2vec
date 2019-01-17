@@ -1,15 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Chart } from 'chart.js';
-import { getUniqueWords, removeStopWords, generateTrainingData, TrainData } from './data/utils';
-import { createModel } from './data/model';
-import * as tf from '@tensorflow/tfjs';
-import { Observable } from 'rxjs';
-import { currencyTypes } from './services/models/currency.models';
-import { UserService } from './services/user-worker.service';
-import { CartService } from './services/cart-worker.service';
-import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { CartService } from './services/cart.service';
+import { currencyTypes } from './services/models/currency.models';
 import { SetCurrencyAction } from './services/reducers/actions';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',

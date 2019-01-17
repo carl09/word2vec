@@ -1,5 +1,4 @@
 // tslint:disable:max-classes-per-file
-import { Subscription } from 'rxjs';
 
 export interface IWorkerAction {
   action: ActionType;

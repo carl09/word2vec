@@ -1,22 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { createSelector, MemoizedSelector, select, Store } from '@ngrx/store';
-import { MonoTypeOperatorFunction, Observable, OperatorFunction } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
-import { selectGetCurrency } from './user-worker.service';
-import { IState } from './reducers/reducers';
-import { IProductSummary, IProduct, IUser, IProductViewed } from './models';
-import { currencyTypes, DEFAULT_CURRENCY, convertCurrency } from './models/currency.models';
-import { LoadProductsAction, ViewedProductAction } from './reducers/actions';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { IProduct, IProductSummary, IProductViewed, IUser } from './models';
+import { convertCurrency, currencyTypes, DEFAULT_CURRENCY } from './models/currency.models';
+import { LoadProductsAction, ViewedProductAction } from './reducers/actions';
+import { IState } from './reducers/reducers';
+import { selectGetCurrency } from './user.service';
 
 const selectUser = (state: IState) => state.user;
 const selectProducts = (state: IState) => state.products;
 
-const selectProductsForDisplay: MemoizedSelector<
-  IState,
-  IProductSummary[]
-> = createSelector(
+const selectProductsForDisplay: MemoizedSelector<IState, IProductSummary[]> = createSelector(
   selectGetCurrency,
   selectProducts,
   (userCurrency: currencyTypes, products: IProduct[]) => {
@@ -50,10 +47,7 @@ const selectRecent: MemoizedSelector<IState, string[]> = createSelector(
   },
 );
 
-const selectProductsRecent: MemoizedSelector<
-  IState,
-  IProductViewed[]
-> = createSelector(
+const selectProductsRecent: MemoizedSelector<IState, IProductViewed[]> = createSelector(
   selectRecent,
   selectProducts,
   (viewedProducts: string[], products: IProduct[]) => {
@@ -90,8 +84,7 @@ const selectProductsRecent: MemoizedSelector<
 
 @Injectable()
 export class ProductsService {
-  constructor(private store: Store<IState>, private http: HttpClient) {
-  }
+  constructor(private store: Store<IState>, private http: HttpClient) {}
 
   public loadProducts() {
     this.http.get<IProduct[]>(`${environment.hostUrl}products`).subscribe((resp: IProduct[]) => {
@@ -111,7 +104,7 @@ export class ProductsService {
         const items = x.filter(y => y.code === code);
         return items[0];
       }),
-      tap(x => {
+      tap(() => {
         this.store.dispatch(
           new ViewedProductAction({
             productCode: code,

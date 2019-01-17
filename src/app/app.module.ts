@@ -1,13 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, InjectionToken } from '@angular/core';
+import { CdkTableModule } from '@angular/cdk/table';
+import { HttpClientModule } from '@angular/common/http';
+import { InjectionToken, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppComponent } from './app.component';
-import { appRoutes } from './app.routes';
-import { RouterModule } from '@angular/router';
-import { ProductListComponent } from './products/product-list/product-list.component';
-import { ProductRecentComponent } from './products/product-recent/product-recent.component';
-import { AppCurrencyPipe } from './shared/app-currency.pipe';
 import {
   MatButtonModule,
   MatCardModule,
@@ -18,20 +12,26 @@ import {
   MatTableModule,
   MatToolbarModule,
 } from '@angular/material';
-import { CdkTableModule } from '@angular/cdk/table';
-import { ProductsService } from './services/products-worker.service';
-import { StoreModule, ActionReducerMap } from '@ngrx/store';
-import { reducers, IState } from './services/reducers/reducers';
-import { HttpClientModule } from '@angular/common/http';
-import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import { UserService } from './services/user-worker.service';
-import { CartService } from './services/cart-worker.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
+import { AppComponent } from './app.component';
+import { appRoutes } from './app.routes';
 import { CartComponent } from './cart/cart.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductRecentComponent } from './products/product-recent/product-recent.component';
+import { CartService } from './services/cart.service';
+import { ProductsService } from './services/products.service';
+import { IState, reducers } from './services/reducers/reducers';
+import { UserService } from './services/user.service';
+import { AppCurrencyPipe } from './shared/app-currency.pipe';
+import { CounterComponent } from './trainer/counter/counter.component';
+import { HistoryComponent } from './trainer/history/history.component';
+import { MatrixComponent } from './trainer/matrix/matrix.component';
 import { LoginComponent } from './user/login/login.component';
 import { LogoffComponent } from './user/logoff/logoff.component';
-import { MatrixComponent } from './trainer/matrix/matrix.component';
-import { HistoryComponent } from './trainer/history/history.component';
-import { CounterComponent } from './trainer/counter/counter.component';
 
 export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IState>>('Registered Reducers');
 
@@ -47,7 +47,7 @@ export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IState>>('Regi
     HistoryComponent,
     AppCurrencyPipe,
     MatrixComponent,
-    CounterComponent
+    CounterComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +68,12 @@ export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IState>>('Regi
     MatTableModule,
     CdkTableModule,
   ],
-  providers: [ProductsService, { provide: REDUCERS_TOKEN, useValue: reducers }, UserService, CartService],
+  providers: [
+    ProductsService,
+    { provide: REDUCERS_TOKEN, useValue: reducers },
+    UserService,
+    CartService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

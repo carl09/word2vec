@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ICartSummary, ICartSave } from '../services/models';
-import { CartService } from '../services/cart-worker.service';
-import { Store } from '@ngrx/store';
-import { CartRemoveAction, CartAddAction, CartRemoveAllAction } from '../services/reducers/actions';
-import { map, take } from 'rxjs/operators';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { CartService } from '../services/cart-worker.service';
+import { ICartSave, ICartSummary } from '../services/models';
+import { CartAddAction, CartRemoveAction, CartRemoveAllAction } from '../services/reducers/actions';
 
 @Component({
   selector: 'app-cart',
@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private store: Store<any>,
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   public ngOnInit(): void {

@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Chart } from 'chart.js';
-import * as tf from '@tensorflow/tfjs';
-import { removeStopWords, getUniqueWords, TrainData, generateTrainingData } from '../../data/utils';
-import { createModel } from '../../data/model';
-import { IProduct } from '../../services/models';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import * as tf from '@tensorflow/tfjs';
+import { Chart } from 'chart.js';
 import { take } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+import { IProduct } from '../../services/models';
 
 @Component({
   selector: 'app-matrix',
@@ -40,22 +38,21 @@ export class MatrixComponent implements OnInit {
           xAxes: [
             {
               display: true,
-              drawBorder: false
+              drawBorder: false,
             },
           ],
           yAxes: [
             {
               display: true,
-              drawBorder: false
+              drawBorder: false,
             },
           ],
         },
         tooltips: {
           bodyFontSize: 20,
           callbacks: {
-            label: function(tooltipItem, data) {
-              const label = data.datasets[tooltipItem.datasetIndex].label || '';
-              return label;
+            label(tooltipItem, data) {
+              return data.datasets[tooltipItem.datasetIndex].label || '';
             },
           },
         },

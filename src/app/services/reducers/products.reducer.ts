@@ -1,4 +1,4 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { IProduct } from '../models';
 import * as reducerActions from './actions';
 

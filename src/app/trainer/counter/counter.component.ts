@@ -1,9 +1,9 @@
-import { OnInit, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ICartSave, IProductSummary } from 'src/app/services/models';
-import { Observable, combineLatest } from 'rxjs';
-import { ProductsService } from 'src/app/services/products-worker.service';
+import { Component, OnInit } from '@angular/core';
+import { combineLatest, Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
+import { ICartSave, IProductSummary } from 'src/app/services/models';
+import { ProductsService } from '../../services/products.service';
 
 export interface ICountUser {
   label: string;
@@ -45,7 +45,7 @@ export class CounterComponent implements OnInit {
           return {
             label: y,
             count: userMap[y] as number,
-          } as ICountUser;
+          };
         });
       }),
     );

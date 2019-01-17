@@ -1,9 +1,9 @@
-import { OnInit, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ICartSave, IProductSummary } from 'src/app/services/models';
-import { Observable, combineLatest } from 'rxjs';
-import { ProductsService } from 'src/app/services/products-worker.service';
+import { Component, OnInit } from '@angular/core';
+import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ICartSave, IProductSummary } from 'src/app/services/models';
+import { ProductsService } from '../../services/products.service';
 
 export interface IHistory {
   sex: string;
@@ -44,7 +44,7 @@ export class HistoryComponent implements OnInit {
               return {
                 productCode: p.productCode,
                 qty: p.qty,
-                img: productMap[p.productCode]
+                img: productMap[p.productCode],
               };
             }),
           };

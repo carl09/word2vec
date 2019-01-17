@@ -1,4 +1,4 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import * as reducerActions from './actions';
 
 export const counterReducer: ActionReducer<number> = (

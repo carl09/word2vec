@@ -34,11 +34,7 @@ export const getUniqueWords = (lines: string[]): string[] => {
   return Array.from(wordSet);
 };
 
-export const resolveWindow = (
-  min: number,
-  max: number,
-  index: number,
-): { left: number; right: number } => {
+export const resolveWindow = (max: number, index: number): { left: number; right: number } => {
   const out: { left: number; right: number } = { left: -1, right: -1 };
 
   if (index === 0) {
@@ -75,7 +71,7 @@ export const generateTrainingData = (line: string): WindowTrainData[] => {
   const results: WindowTrainData[] = [];
 
   for (let i = 0; i < items.length; i++) {
-    const resolveNabours = resolveWindow(0, items.length - 1, i);
+    const resolveNabours = resolveWindow(items.length - 1, i);
 
     results.push({
       data: items[i],

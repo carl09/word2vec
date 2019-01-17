@@ -1,6 +1,5 @@
 // tslint:disable:max-classes-per-file
 import { Action } from '@ngrx/store';
-import { IProduct } from '../../models';
 import { cartActions } from './cart.actions';
 import { productsActions } from './products.actions';
 import { userActions } from './user.actions';
