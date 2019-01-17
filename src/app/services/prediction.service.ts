@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, share, shareReplay } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { ICartSave, IProduct } from './models';
@@ -53,7 +53,7 @@ export class PredictionService {
 
         // console.log(r);
         const ranking = Array.from(r)
-          
+
           .map((v, i) => {
             return {
               label: productsData[i].code,

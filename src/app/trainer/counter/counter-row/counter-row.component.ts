@@ -1,6 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { PredictionService } from './../../../services/prediction.service';
 
 @Component({
@@ -10,26 +9,16 @@ import { PredictionService } from './../../../services/prediction.service';
   templateUrl: './counter-row.component.html',
   styleUrls: ['./counter-row.component.scss'],
 })
-export class CounterRowComponent implements OnInit, OnDestroy {
+export class CounterRowComponent implements OnInit {
   @Input() public code: string;
   @Input() public count: number;
   @Input() public img: string;
 
   public guesses$: Observable<any>;
 
-  private ngUnsubscribe = new Subject<void>();
-
   constructor(private predictionService: PredictionService) {}
 
   ngOnInit(): void {
     this.guesses$ = this.predictionService.guess(this.code);
-    // .pipe(takeUntil(this.ngUnsubscribe))
-    // .subscribe(x => {
-    //   console.log('guess', this.code, x);
-    // });
-  }
-
-  public ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
   }
 }

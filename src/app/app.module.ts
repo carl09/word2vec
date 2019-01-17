@@ -48,7 +48,7 @@ export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IState>>('Regi
     AppCurrencyPipe,
     MatrixComponent,
     CounterComponent,
-    CounterRowComponent
+    CounterRowComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +59,7 @@ export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IState>>('Regi
 
     StoreModule.forRoot(REDUCERS_TOKEN),
     StoreDevtoolsModule.instrument({
-      maxAge: 10
+      maxAge: 10,
     }),
 
     MatToolbarModule,

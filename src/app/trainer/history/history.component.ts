@@ -23,7 +23,10 @@ export interface IHistory {
 export class HistoryComponent implements OnInit {
   public items$: Observable<IHistory[]>;
 
-  constructor(private predictionService: PredictionService, private productsService: ProductsService) {}
+  constructor(
+    private predictionService: PredictionService,
+    private productsService: ProductsService,
+  ) {}
 
   ngOnInit(): void {
     this.items$ = combineLatest(

@@ -26,7 +26,10 @@ export class CounterComponent implements OnInit {
 
   public products$: Observable<ICountProducts[]>;
 
-  constructor(private predictionService: PredictionService, private productsService: ProductsService) {}
+  constructor(
+    private predictionService: PredictionService,
+    private productsService: ProductsService,
+  ) {}
 
   ngOnInit(): void {
     const http$: Observable<ICartSave[]> = this.predictionService.cartSaveData();
@@ -66,17 +69,16 @@ export class CounterComponent implements OnInit {
           });
         });
 
-        return Object.keys(procustMap)
-          .map(z => {
-            return {
-              code: z,
-              img: productImageMap[z],
-              count: procustMap[z],
-            };
-          })
-          // .sort((a, b) => {
-          //   return a.count - b.count;
-          // });
+        return Object.keys(procustMap).map(z => {
+          return {
+            code: z,
+            img: productImageMap[z],
+            count: procustMap[z],
+          };
+        });
+        // .sort((a, b) => {
+        //   return a.count - b.count;
+        // });
       }),
     );
   }
