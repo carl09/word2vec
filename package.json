@@ -32,6 +32,7 @@
     "@tensorflow/tfjs": "0.14.2",
     "@tensorflow/tfjs-node": "0.2.3",
     "@ngrx/store": "7.0.0",
+    "@ngrx/store-devtools": "7.0.0",
     "chart.js": "2.7.3",
     "express": "4.16.4",
     "body-parser": "1.18.3"

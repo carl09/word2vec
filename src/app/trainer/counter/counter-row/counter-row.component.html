@@ -1,0 +1,12 @@
+<td> <div
+    class="product-image"
+    [ngStyle]="{ 'background-image': 'url(' + img + ')' }"
+  ></div></td>
+<td>{{ code }}</td>
+<td>{{ count }}</td>
+<td>
+<div *ngFor="let g of (guesses$ | async)"
+    class="product-guess-image"
+    [ngStyle]="{ 'background-image': 'url(' + g.img + ')' }"
+  ></div>
+</td>

@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProductSummary, IProductViewed } from '../../services/models/products.model';
-import { ProductsService } from '../../services/products-worker.service';
-// import {
-//   IProductSummary,
-//   IProductViewed,
-//   ProductsService,
-//   StateProxyService,
-// } from 'state';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-list',

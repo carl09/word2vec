@@ -1,14 +1,23 @@
-<div *ngFor="let user of (users$ | async)">
-  {{ user.label }} | {{ user.count }}
-</div>
+<div *ngFor="let user of (users$ | async)">{{ user.label }} | {{ user.count }}</div>
 
-<br>
-<br>
+<br />
+<br />
 
-<div class="product-wrapper" *ngFor="let product of (products$ | async)">
+<table>
+  <!-- <app-counter-row *ngFor="let product of (products$ | async)" [code]="product.code"></app-counter-row> -->
+  <tr
+    app-counter-tr
+    *ngFor="let product of (products$ | async)"
+    [code]="product.code"
+    [count]="product.count"
+    [img]="product.img"
+  ></tr>
+</table>
+
+<!-- <div class="product-wrapper" *ngFor="let product of (products$ | async)">
   {{ product.code }} | {{ product.count }}
   <div
     class="product-image"
     [ngStyle]="{ 'background-image': 'url(' + product.img + ')' }"
   ></div>
-</div>
+</div> -->

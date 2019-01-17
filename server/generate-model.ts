@@ -1,9 +1,7 @@
-import * as tf from '@tensorflow/tfjs';
-require('@tensorflow/tfjs-node');
-import { IProduct } from '../src/app/services/models/products.model';
+import * as tf from '@tensorflow/tfjs-node';
 import { TrainData, transformCartToTraining } from '../src/app/data/utils';
 import { ICartSave } from '../src/app/services/models/index';
-import { createModel } from '../src/app/data/model';
+import { IProduct } from '../src/app/services/models/products.model';
 
 export const generateModel = (
   productsData: IProduct[],
@@ -36,18 +34,18 @@ export const generateModel = (
     encodeNumberLength,
   );
 
-  const result = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     model
       .fit(dataTensor, labelTensor, {
-        epochs: epochs,
+        epochs,
         shuffle: true,
         // batchSize: 50,
         verbose: 1,
-        callbacks: {
-          onEpochEnd: async (epoch, logs) => {
-            // console.log(epoch, logs.loss);
-          },
-        },
+        // callbacks: {
+        //   onEpochEnd: async (epoch, logs) => {
+        //     // console.log(epoch, logs.loss);
+        //   },
+        // },
       })
       .then(x => {
         dataTensor.dispose();
@@ -66,6 +64,4 @@ export const generateModel = (
         reject(err);
       });
   });
-
-  return result;
 };

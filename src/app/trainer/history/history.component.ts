@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ICartSave, IProductSummary } from 'src/app/services/models';
+import { PredictionService } from 'src/app/services/prediction.service';
 import { ProductsService } from '../../services/products.service';
 
 export interface IHistory {
@@ -23,11 +23,11 @@ export interface IHistory {
 export class HistoryComponent implements OnInit {
   public items$: Observable<IHistory[]>;
 
-  constructor(private http: HttpClient, private productsService: ProductsService) {}
+  constructor(private predictionService: PredictionService, private productsService: ProductsService) {}
 
   ngOnInit(): void {
     this.items$ = combineLatest(
-      this.http.get('http://localhost:3000/cartData'),
+      this.predictionService.cartSaveData(),
       this.productsService.getProducts(),
     ).pipe(
       map(([x, y]: [ICartSave[], IProductSummary[]]) => {

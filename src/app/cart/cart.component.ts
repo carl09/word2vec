@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { CartService } from '../services/cart-worker.service';
+import { CartService } from '../services/cart.service';
 import { ICartSave, ICartSummary } from '../services/models';
 import { CartAddAction, CartRemoveAction, CartRemoveAllAction } from '../services/reducers/actions';
 

@@ -1,15 +1,16 @@
+import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as fs from 'fs';
-import * as bodyParser from 'body-parser';
+import { createModel } from '../src/app/data/model';
 import { ICartSave, IProduct } from '../src/app/services/models/index';
 import { generateModel } from './generate-model';
-import { createModel } from '../src/app/data/model';
+
 const app = express();
 const port = 3000;
 
 let UpdatingModel = false;
 
-app.use(function(req, res, next) {
+app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
@@ -18,12 +19,12 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/products', (req, res) => {
+app.get('/products', (_req, res) => {
   const contents = fs.readFileSync('./server/assets/products.json').toString();
   res.send(JSON.parse(contents));
 });
 
-app.get('/cartData', (req, res) => {
+app.get('/cartData', (_req, res) => {
   const contents = fs.readFileSync('./server/assets/cartData.json').toString();
   res.send(JSON.parse(contents));
 });

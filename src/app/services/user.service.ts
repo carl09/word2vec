@@ -29,7 +29,9 @@ export const selectGetCurrency: MemoizedSelector<IState, currencyTypes> = create
   },
 );
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService {
   constructor(private store: Store<IState>) {}
 

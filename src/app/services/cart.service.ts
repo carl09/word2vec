@@ -74,7 +74,9 @@ const selectCartSummary: MemoizedSelector<IState, ICartSummary[]> = createSelect
   },
 );
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CartService {
   constructor(private store: Store<IState>) {}
 

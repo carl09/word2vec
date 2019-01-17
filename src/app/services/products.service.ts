@@ -82,7 +82,9 @@ const selectProductsRecent: MemoizedSelector<IState, IProductViewed[]> = createS
   },
 );
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ProductsService {
   constructor(private store: Store<IState>, private http: HttpClient) {}
 
@@ -120,5 +122,9 @@ export class ProductsService {
 
   public getRecentProducts(): Observable<IProductViewed[]> {
     return this.store.pipe(select(selectProductsRecent));
+  }
+
+  public getProductRaw(): Observable<IProduct[]> {
+    return this.store.pipe(select(selectProducts));
   }
 }

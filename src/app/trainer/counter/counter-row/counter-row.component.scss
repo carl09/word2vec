@@ -1,0 +1,25 @@
+.product-image {
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+}
+
+.product-wrapper {
+  float: left;
+  border-color: #ccc;
+  border-width: 1px;
+  border-style: solid;
+  margin: 10px;
+  padding: 10px;
+}
+
+.product-guess-image {
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  float: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}

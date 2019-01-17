@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ICartSave, IProductSummary } from 'src/app/services/models';
 import { ProductsService } from '../../services/products.service';
+import { PredictionService } from './../../services/prediction.service';
 
 export interface ICountUser {
   label: string;
@@ -26,12 +26,10 @@ export class CounterComponent implements OnInit {
 
   public products$: Observable<ICountProducts[]>;
 
-  constructor(private http: HttpClient, private productsService: ProductsService) {}
+  constructor(private predictionService: PredictionService, private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    const http$: Observable<ICartSave[]> = this.http
-      .get<ICartSave[]>('http://localhost:3000/cartData')
-      .pipe(share());
+    const http$: Observable<ICartSave[]> = this.predictionService.cartSaveData();
 
     this.users$ = http$.pipe(
       map(x => {
@@ -76,13 +74,10 @@ export class CounterComponent implements OnInit {
               count: procustMap[z],
             };
           })
-          .sort((a, b) => {
-            // return a.count > b.count ? 1 : b.count > a.count ? -1 : 0;
-            return a.count - b.count;
-          });
+          // .sort((a, b) => {
+          //   return a.count - b.count;
+          // });
       }),
     );
-
-    // this.items$ = this.http.get('http://localhost:3000/cartData') as Observable<ICartSave[]>;
   }
 }

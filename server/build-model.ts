@@ -1,10 +1,17 @@
+// tslint:disable-next-line:no-var-requires
 require('@tensorflow/tfjs-node');
-import * as cartItemsData from './assets/cartData.json';
-import * as productsData from './assets/products.json';
-import { IProduct } from '../src/app/services/models/products.model';
+
+import * as fs from 'fs';
+import { createModelWithParms } from '../src/app/data/model';
 import { ICartSave } from '../src/app/services/models/index';
+import { IProduct } from '../src/app/services/models/products.model';
 import { generateModel } from './generate-model';
-import { createModel, createModelWithParms } from '../src/app/data/model';
+
+const cartItemsDataJson = fs.readFileSync('./server/assets/cartData.json').toString();
+const cartItemsData: ICartSave[] = JSON.parse(cartItemsDataJson);
+
+const productsDataJson = fs.readFileSync('./server/assets/products.json').toString();
+const productsData: IProduct[] = JSON.parse(productsDataJson);
 
 interface IHyperParm {
   activation: string;
@@ -48,9 +55,9 @@ losses.forEach(loss => {
   activationTypes.forEach(activation => {
     optimizers.forEach(optimizer => {
       hyperParms.push({
-        activation: activation,
-        loss: loss,
-        optimizer: optimizer,
+        activation,
+        loss,
+        optimizer,
       });
     });
   });
@@ -76,6 +83,7 @@ generateModel(
   300,
 );
 
+// tslint:disable-next-line:no-unused
 async function doIt(parms: IHyperParm[]): Promise<ITrainResult[]> {
   const results: ITrainResult[] = [];
 
