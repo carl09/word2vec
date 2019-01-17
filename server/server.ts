@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as bodyParser from 'body-parser';
 import { ICartSave, IProduct } from '../src/app/services/models/index';
 import { generateModel } from './generate-model';
+import { createModel } from '../src/app/data/model';
 const app = express();
 const port = 3000;
 
@@ -42,7 +43,9 @@ app.post('/cartData', (req, res) => {
     UpdatingModel = true;
     const productsJson = fs.readFileSync('./server/assets/products.json').toString();
 
-    generateModel(JSON.parse(productsJson) as IProduct[], existing).then(() => {
+    const products = JSON.parse(productsJson) as IProduct[];
+
+    generateModel(products, existing, createModel(products.length), 100).then(() => {
       UpdatingModel = false;
     });
   }

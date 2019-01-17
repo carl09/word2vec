@@ -4,48 +4,95 @@ import * as productsData from './assets/products.json';
 import { IProduct } from '../src/app/services/models/products.model';
 import { ICartSave } from '../src/app/services/models/index';
 import { generateModel } from './generate-model';
+import { createModel, createModelWithParms } from '../src/app/data/model';
 
+interface IHyperParm {
+  activation: string;
+  loss: number;
+  optimizer: string;
+}
 
-generateModel(productsData as IProduct[], cartItemsData as ICartSave[]);
+interface ITrainResult {
+  loss: number;
+  name: string;
+}
 
-// const products = (productsData as IProduct[]).map(x => x.code);
+const activationTypes: string[] = [
+  'elu',
+  // 'hardSigmoid',
+  'linear',
+  // 'relu',
+  // 'relu6',
+  'selu',
+  'sigmoid',
+  'softmax',
+  'softplus',
+  'softsign',
+  'tanh',
+];
+const losses: number[] = [0.5, 0.05, 0.005];
 
-// const product2int: { [id: string]: number } = {};
+const optimizers: string[] = [
+  // 'sgd',
+  // 'momentum',
+  'rmsprop',
+  'adam',
+  // 'adadelta',
+  'adamax',
+  // 'adagrad',
+];
 
-// products.forEach((w, i) => {
-//   product2int[w] = i;
+const hyperParms: IHyperParm[] = [];
+
+losses.forEach(loss => {
+  activationTypes.forEach(activation => {
+    optimizers.forEach(optimizer => {
+      hyperParms.push({
+        activation: activation,
+        loss: loss,
+        optimizer: optimizer,
+      });
+    });
+  });
+});
+
+// doIt(hyperParms).then(r => {
+
+//   console.log('--------------------------------------------');
+
+//   console.log(
+//     r.sort((a, b) => {
+//       return a.loss - b.loss;
+//     }),
+//   );
 // });
 
-// const trainingData: TrainData[] = (cartItemsData as ICartSave[]).reduce((a, c) => {
-//   return a.concat(transformCartToTraining(c, product2int));
-// }, []);
+const p = productsData as IProduct[];
 
-// const encodeNumberLength = products.length;
+generateModel(
+  p,
+  cartItemsData as ICartSave[],
+  createModelWithParms(p.length, 'linear', 0.015, 'adamax'),
+  300,
+);
 
-// const model = createModel(encodeNumberLength);
+async function doIt(parms: IHyperParm[]): Promise<ITrainResult[]> {
+  const results: ITrainResult[] = [];
 
-// const dataTensor = tf.oneHot(
-//   tf.tensor1d([...trainingData.map(x => x.data)], 'int32'),
-//   encodeNumberLength,
-// );
-// const labelTensor = tf.oneHot(
-//   tf.tensor1d([...trainingData.map(x => x.label)], 'int32'),
-//   encodeNumberLength,
-// );
+  const products = productsData as IProduct[];
 
-// model
-//   .fit(dataTensor, labelTensor, {
-//     epochs: 1000,
-//     shuffle: true,
-//     callbacks: {
-//       onEpochEnd: async (epoch, logs) => {
-//         // console.log(epoch, logs.loss);
-//       },
-//     },
-//   })
-//   .then(() => {
-//     dataTensor.dispose();
-//     labelTensor.dispose();
-
-//     model.save('file://./assets/cart-1a');
-//   });
+  for (const i of parms) {
+    const result = await generateModel(
+      products,
+      cartItemsData as ICartSave[],
+      createModelWithParms(products.length, i.activation, i.loss, i.optimizer),
+      500,
+    );
+    console.log(`Run: ${i.activation} : ${i.loss} : ${i.optimizer}`, result);
+    results.push({
+      name: `Run: ${i.activation} : ${i.loss} : ${i.optimizer}`,
+      loss: result,
+    });
+  }
+  return results;
+}

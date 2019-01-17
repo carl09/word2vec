@@ -1,4 +1,4 @@
-import { ICartSave } from "../services/models";
+import { ICartSave } from '../services/models';
 
 export interface WindowTrainData {
   data: string;
@@ -86,7 +86,6 @@ export const generateTrainingData = (line: string): WindowTrainData[] => {
 
   return results;
 };
-
 
 export const transformCartToTraining = (
   cartItem: ICartSave,

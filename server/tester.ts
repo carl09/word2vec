@@ -1,12 +1,7 @@
 import * as tf from '@tensorflow/tfjs';
+import { removeStopWords, getUniqueWords, TrainData, generateTrainingData } from '../src/app/data/utils';
+import { createModel } from '../src/app/data/model';
 require('@tensorflow/tfjs-node');
-import {
-  removeStopWords,
-  getUniqueWords,
-  generateTrainingData,
-  TrainData,
-} from './src/app/data/utils';
-import { createModel } from './src/app/data/model';
 
 const WINDOW_SIZE = 2;
 

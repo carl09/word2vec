@@ -8,6 +8,8 @@ import { createModel } from '../src/app/data/model';
 export const generateModel = (
   productsData: IProduct[],
   cartItemsData: ICartSave[],
+  model: tf.Sequential,
+  epochs: number = 1000,
 ): Promise<any> => {
   const products = productsData.map(x => x.code);
 
@@ -23,7 +25,7 @@ export const generateModel = (
 
   const encodeNumberLength = products.length;
 
-  const model = createModel(encodeNumberLength);
+  // const model = createModel(encodeNumberLength);
 
   const dataTensor = tf.oneHot(
     tf.tensor1d([...trainingData.map(x => x.data)], 'int32'),
@@ -37,22 +39,27 @@ export const generateModel = (
   const result = new Promise((resolve, reject) => {
     model
       .fit(dataTensor, labelTensor, {
-        epochs: 1000,
+        epochs: epochs,
         shuffle: true,
-        batchSize: 50,
+        // batchSize: 50,
+        verbose: 1,
         callbacks: {
           onEpochEnd: async (epoch, logs) => {
             // console.log(epoch, logs.loss);
           },
         },
       })
-      .then(() => {
+      .then(x => {
         dataTensor.dispose();
         labelTensor.dispose();
 
         model.save('file://./server/assets/cart-1a');
 
-        resolve();
+        const losses = x.history.loss as number[];
+
+        // console.log(losses[losses.length - 1]);
+
+        resolve(losses[losses.length - 1]);
       })
       .catch(err => {
         console.error(err);
