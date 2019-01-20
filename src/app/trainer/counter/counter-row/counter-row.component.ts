@@ -15,10 +15,12 @@ export class CounterRowComponent implements OnInit {
   @Input() public img: string;
 
   public guesses$: Observable<any>;
+  public suggest$: Observable<any>;
 
   constructor(private predictionService: PredictionService) {}
 
   ngOnInit(): void {
     this.guesses$ = this.predictionService.guess(this.code);
+    this.suggest$ = this.predictionService.remoteSuggest(this.code);
   }
 }

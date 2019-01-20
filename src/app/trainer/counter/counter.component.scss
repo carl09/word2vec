@@ -5,11 +5,26 @@
   overflow: hidden;
 }
 
-.product-wrapper{
-    float: left;
-    border-color: #ccc;
-    border-width: 1px;
-    border-style: solid;
-    margin: 10px;
-    padding: 10px;
+.product-wrapper {
+  float: left;
+  border-color: #ccc;
+  border-width: 1px;
+  border-style: solid;
+  margin: 10px;
+  padding: 10px;
+}
+
+.count-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 20px;
+
+  .count-table-header {
+    background-color: #ccc;
+    border-bottom: 1px solid black;
+  }
+
+  .count-table-row {
+    border-bottom: 1px solid black;
+  }
 }

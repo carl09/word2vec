@@ -1,14 +1,13 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
-import * as fs from 'fs';
 import { createModel } from '../src/app/data/model';
-import { ICartSave, IProduct } from '../src/app/services/models/index';
+import { ICartSave } from '../src/app/services/models/index';
+import { getCartSavedData, getProductByCode, getProducts, setCartSavedData } from './data';
 import { generateModel } from './generate-model';
+import { guessProduct } from './service';
 
 const app = express();
 const port = 3000;
-
-let UpdatingModel = false;
 
 app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -19,39 +18,36 @@ app.use((_req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/products', (_req, res) => {
-  const contents = fs.readFileSync('./server/assets/products.json').toString();
-  res.send(JSON.parse(contents));
+app.get('/product', async (_req, res) => {
+  res.json(await getProducts());
 });
 
-app.get('/cartData', (_req, res) => {
-  const contents = fs.readFileSync('./server/assets/cartData.json').toString();
-  res.send(JSON.parse(contents));
+app.get('/product/:code', async (req, res) => {
+  res.json(await getProductByCode(req.params.code));
 });
 
-app.post('/cartData', (req, res) => {
+app.get('/product/:code/suggest', async (req, res) => {
+  res.json(await guessProduct(req.params.code));
+});
+
+app.get('/cartData', async (_req, res) => {
+  res.json(await getCartSavedData());
+});
+
+app.post('/cartData', async (req, res) => {
   const body: ICartSave = req.body;
   console.log(req.body);
 
-  const contents = fs.readFileSync('./server/assets/cartData.json').toString();
-  const existing: ICartSave[] = JSON.parse(contents);
+  const existing = await getCartSavedData();
 
   existing.push(body);
 
-  fs.writeFileSync('./server/assets/cartData.json', JSON.stringify(existing));
+  await setCartSavedData(existing);
+  const products = await getProducts();
 
-  if (!UpdatingModel) {
-    UpdatingModel = true;
-    const productsJson = fs.readFileSync('./server/assets/products.json').toString();
+  await generateModel(products, existing, createModel(products.length), 100).then(() => {});
 
-    const products = JSON.parse(productsJson) as IProduct[];
-
-    generateModel(products, existing, createModel(products.length), 100).then(() => {
-      UpdatingModel = false;
-    });
-  }
-
-  res.send(existing);
+  res.json(existing);
 });
 
 app.use('/assets', express.static('./server/assets/'));

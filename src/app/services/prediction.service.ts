@@ -48,8 +48,15 @@ export class PredictionService {
           product2int[w.code] = i;
         });
 
-        const king = tf.oneHot(tf.tensor1d([product2int[code]], 'int32'), productsData.length);
-        const r: Float32Array = (model.predict(king) as tf.Tensor).dataSync() as Float32Array;
+        const productTensor = tf.oneHot(
+          tf.tensor1d([product2int[code]], 'int32'),
+          productsData.length,
+        );
+        const r: Float32Array = (model.predict(
+          productTensor,
+        ) as tf.Tensor).dataSync() as Float32Array;
+
+        productTensor.dispose();
 
         // console.log(r);
         const ranking = Array.from(r)
@@ -66,13 +73,27 @@ export class PredictionService {
             return b.rank - a.rank;
           });
 
-        return [ranking[0], ranking[1], ranking[2], ranking[3]];
+        return [ranking[0], ranking[1], ranking[2]];
       }),
     );
   }
 
+  public remoteSuggest(code: string): Observable<Array<{ label: string; img: string }>> {
+    return this.http.get<IProduct[]>(`${environment.hostUrl}product/${code}/suggest`).pipe(
+      map(x => {
+        return x.map(z => {
+          return {
+            label: z.code,
+            img: z.img,
+          };
+        });
+      }),
+      share(),
+    );
+  }
+
   public cartSaveData(): Observable<ICartSave[]> {
-    return this.http.get<ICartSave[]>('http://localhost:3000/cartData').pipe(share());
+    return this.http.get<ICartSave[]>(`${environment.hostUrl}cartData`).pipe(share());
   }
 
   private model() {

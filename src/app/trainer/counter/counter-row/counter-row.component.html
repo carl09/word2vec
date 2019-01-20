@@ -1,7 +1,14 @@
 <td><div class="product-image" [ngStyle]="{ 'background-image': 'url(' + img + ')' }"></div></td>
 <td>{{ code }}</td>
 <td>{{ count }}</td>
-<td>
+<td clas="row-legacy">
+  <div
+    *ngFor="let g of (suggest$ | async)"
+    class="product-guess-image"
+    [ngStyle]="{ 'background-image': 'url(' + g.img + ')' }"
+  ></div>
+</td>
+<td class="row-guess">
   <div
     *ngFor="let g of (guesses$ | async)"
     class="product-guess-image"

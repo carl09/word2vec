@@ -89,7 +89,7 @@ export class ProductsService {
   constructor(private store: Store<IState>, private http: HttpClient) {}
 
   public loadProducts() {
-    this.http.get<IProduct[]>(`${environment.hostUrl}products`).subscribe((resp: IProduct[]) => {
+    this.http.get<IProduct[]>(`${environment.hostUrl}product`).subscribe((resp: IProduct[]) => {
       this.store.dispatch(
         new LoadProductsAction({
           products: resp,
