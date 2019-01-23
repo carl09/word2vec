@@ -1,7 +1,15 @@
+import * as tf from '@tensorflow/tfjs';
 import { IProduct } from '../../src/app/services/models';
 import { getCartSavedData, getProducts } from './../data/index';
 
-export const guessProduct = async (code: string): Promise<IProduct[]> => {
+// tslint:disable-next-line:no-unused
+const test = (foo: string) => {
+  return (b: string) => {
+    return foo + b;
+  };
+};
+
+export const suggestProduct = async (code: string): Promise<IProduct[]> => {
   const products = await getProducts();
   const cartData = await getCartSavedData();
 
@@ -34,4 +42,43 @@ export const guessProduct = async (code: string): Promise<IProduct[]> => {
   console.log(ordered);
 
   return ordered;
+};
+
+export const guessProduct = async (code: string): Promise<IProduct[]> => {
+  const products = await getProducts();
+
+  const product2int: { [id: string]: number } = products.reduce((a, w, i) => {
+    a[w.code] = i;
+    return a;
+  }, {});
+
+  const model = await tf.loadModel('file://./server/assets/cart-1a/model.json');
+
+  const productTensor = tf.oneHot(tf.tensor1d([product2int[code]], 'int32'), products.length);
+  const r: Float32Array = (await (model.predict(
+    productTensor,
+  ) as tf.Tensor).data()) as Float32Array;
+
+  productTensor.dispose();
+
+  const ranking = Array.from(r)
+    .map((v, i) => {
+      return {
+        label: products[i].code,
+        img: products[i].img,
+        rank: v,
+      };
+    })
+    .filter(x => x.label !== code)
+    .sort((a, b) => {
+      return b.rank - a.rank;
+    })
+    .slice(0, 3)
+    .map(x => {
+      return products.find(y => y.code === x.label);
+    });
+
+  console.log(ranking);
+
+  return ranking;
 };

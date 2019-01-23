@@ -4,7 +4,7 @@ import { createModel } from '../src/app/data/model';
 import { ICartSave } from '../src/app/services/models/index';
 import { getCartSavedData, getProductByCode, getProducts, setCartSavedData } from './data';
 import { generateModel } from './generate-model';
-import { guessProduct } from './service';
+import { guessProduct, suggestProduct } from './service';
 
 const app = express();
 const port = 3000;
@@ -27,6 +27,10 @@ app.get('/product/:code', async (req, res) => {
 });
 
 app.get('/product/:code/suggest', async (req, res) => {
+  res.json(await suggestProduct(req.params.code));
+});
+
+app.get('/product/:code/guess', async (req, res) => {
   res.json(await guessProduct(req.params.code));
 });
 

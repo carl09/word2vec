@@ -42,11 +42,10 @@ export class PredictionService {
   public guess(code: string): Observable<Array<{ label: string; img: string; rank: number }>> {
     return combineLatest(this.model(), this.productsService.getProductRaw()).pipe(
       map(([model, productsData]: [tf.Model, IProduct[]]) => {
-        const product2int: { [id: string]: number } = {};
-
-        productsData.forEach((w, i) => {
-          product2int[w.code] = i;
-        });
+        const product2int: { [id: string]: number } = productsData.reduce((a, w, i) => {
+          a[w.code] = i;
+          return a;
+        }, {});
 
         const productTensor = tf.oneHot(
           tf.tensor1d([product2int[code]], 'int32'),
@@ -59,8 +58,7 @@ export class PredictionService {
         productTensor.dispose();
 
         // console.log(r);
-        const ranking = Array.from(r)
-
+        return Array.from(r)
           .map((v, i) => {
             return {
               label: productsData[i].code,
@@ -71,9 +69,10 @@ export class PredictionService {
           .filter(x => x.label !== code)
           .sort((a, b) => {
             return b.rank - a.rank;
-          });
+          })
+          .slice(0, 3);
 
-        return [ranking[0], ranking[1], ranking[2]];
+        // return [ranking[0], ranking[1], ranking[2]];
       }),
     );
   }
