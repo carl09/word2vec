@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { ProductsService } from 'src/app/services/products.service';
+import { CartService } from '../../services/cart.service';
 import { IProductSummary, IProductViewed } from '../../services/models/products.model';
+import { PredictionService } from '../../services/prediction.service';
 import { CartAddAction } from '../../services/reducers/actions/cart.actions';
 
 @Component({
@@ -23,6 +25,8 @@ export class ProductDetailComponent implements OnInit {
     private router: Router,
     private store: Store<any>,
     private productsService: ProductsService,
+    private cartService: CartService,
+    private predictionService: PredictionService,
   ) {}
 
   public ngOnInit() {
@@ -34,7 +38,20 @@ export class ProductDetailComponent implements OnInit {
       }),
     );
 
-    this.productViewed$ = this.productsService.getRecentProducts();
+    this.productViewed$ = this.cartService.getCartCodes().pipe(
+      switchMap(x => {
+        return this.predictionService.guess(5, ...x);
+      }),
+      map(x => {
+        return x.map(y => {
+          return {
+            code: y.label,
+            name: y.name,
+            img: y.img,
+          };
+        });
+      }),
+    );
   }
 
   public addToCart() {

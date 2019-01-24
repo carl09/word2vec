@@ -65,6 +65,7 @@
     "tslint-angular": "1.1.2",
     "tslint-config-prettier": "1.17.0",
     "tslint-consistent-codestyle": "1.15.0",
+    "typemoq": "2.1.0",
     "typescript": "3.2.2"
   }
 }

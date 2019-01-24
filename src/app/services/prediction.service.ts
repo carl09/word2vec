@@ -3,9 +3,21 @@ import { Injectable } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
 import { combineLatest, Observable } from 'rxjs';
 import { map, share, shareReplay } from 'rxjs/operators';
-import { environment } from './../../environments/environment';
 import { ICartSave, IProduct } from './models';
 import { ProductsService } from './products.service';
+import { ResolverService } from './resolver.service';
+
+const predict = (model: tf.Model, productLength: number) => {
+  return (productId: number) => {
+    let result: number[];
+    tf.tidy(() => {
+      const productTensor = tf.oneHot(tf.tensor1d([productId], 'int32'), productLength);
+
+      result = Array.from((model.predict(productTensor) as tf.Tensor).dataSync());
+    });
+    return result;
+  };
+};
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +25,11 @@ import { ProductsService } from './products.service';
 export class PredictionService {
   private model$: Observable<tf.Model>;
 
-  constructor(private productsService: ProductsService, private http: HttpClient) {}
+  constructor(
+    private productsService: ProductsService,
+    private http: HttpClient,
+    private resolverService: ResolverService,
+  ) {}
 
   public getMatrix(): Observable<Array<{ x: number; y: number; label: string; color: string }>> {
     return combineLatest(this.model(), this.productsService.getProductRaw()).pipe(
@@ -39,7 +55,12 @@ export class PredictionService {
     );
   }
 
-  public guess(code: string): Observable<Array<{ label: string; img: string; rank: number }>> {
+  public guess(
+    itemsCount: number,
+    ...code: string[]
+  ): Observable<Array<{ label: string; img: string; name: string; rank: number }>> {
+    console.log('PredictionService.guess', code);
+
     return combineLatest(this.model(), this.productsService.getProductRaw()).pipe(
       map(([model, productsData]: [tf.Model, IProduct[]]) => {
         const product2int: { [id: string]: number } = productsData.reduce((a, w, i) => {
@@ -47,38 +68,41 @@ export class PredictionService {
           return a;
         }, {});
 
-        const productTensor = tf.oneHot(
-          tf.tensor1d([product2int[code]], 'int32'),
-          productsData.length,
-        );
-        const r: Float32Array = (model.predict(
-          productTensor,
-        ) as tf.Tensor).dataSync() as Float32Array;
+        const results = code.map(x => {
+          return predict(model, productsData.length)(product2int[x]);
+        });
 
-        productTensor.dispose();
+        const summaryResults = results.reduce((a, perdiction) => {
+          perdiction.forEach((v, i) => {
+            if (a[i]) {
+              a[i] = a[i] + v;
+            } else {
+              a.push(v);
+            }
+          });
+          return a;
+        }, []);
 
-        // console.log(r);
-        return Array.from(r)
+        return summaryResults
           .map((v, i) => {
             return {
               label: productsData[i].code,
               img: productsData[i].img,
+              name: productsData[i].name,
               rank: v,
             };
           })
-          .filter(x => x.label !== code)
+          .filter(x => !code.find(y => y === x.label))
           .sort((a, b) => {
             return b.rank - a.rank;
           })
-          .slice(0, 3);
-
-        // return [ranking[0], ranking[1], ranking[2]];
+          .slice(0, itemsCount);
       }),
     );
   }
 
   public remoteSuggest(code: string): Observable<Array<{ label: string; img: string }>> {
-    return this.http.get<IProduct[]>(`${environment.hostUrl}product/${code}/suggest`).pipe(
+    return this.http.get<IProduct[]>(this.resolverService.productSuggest(code)).pipe(
       map(x => {
         return x.map(z => {
           return {
@@ -92,10 +116,11 @@ export class PredictionService {
   }
 
   public cartSaveData(): Observable<ICartSave[]> {
-    return this.http.get<ICartSave[]>(`${environment.hostUrl}cartData`).pipe(share());
+    return this.http.get<ICartSave[]>(this.resolverService.cartListSaved()).pipe(share());
   }
 
   private model() {
+    console.log('PredictionService.model');
     if (!this.model$) {
       this.model$ = this.requestModel().pipe(shareReplay(1));
     }
@@ -103,10 +128,16 @@ export class PredictionService {
   }
 
   private requestModel(): Observable<tf.Model> {
+    console.log('PredictionService.requestModel');
     return Observable.create(obs => {
-      tf.loadModel(`${environment.hostUrl}assets/cart-1a/model.json`).then(model => {
-        obs.next(model);
-      });
+      this.resolverService
+        .getModel()
+        .then(model => {
+          obs.next(model);
+        })
+        .catch(err => {
+          obs.error(err);
+        });
     });
   }
 }

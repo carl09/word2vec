@@ -1,23 +1,32 @@
-<div *ngIf="product$ | async as product" class="content">
+<div *ngIf="(product$ | async) as product" class="content">
+  <app-product-recent
+    *ngIf="(productViewed$ | async) as productViewed"
+    [productViewed]="productViewed"
+  ></app-product-recent>
 
-        <app-product-recent *ngIf="(productViewed$ | async)?.length" [productViewed]="productViewed$ | async"></app-product-recent>
-
-    <div style="display: flex">
-        <div>
-            <div class="product-image-container">
-                <img [src]="product.img" />
-                <!-- <div class="product-image" [ngStyle]="{ 'background-image': 'url(' + product.img +')'}"></div> -->
-            </div>
-        </div>
-        <div>
-            <div>
-                <div class="mat-title">{{ product.name }}</div>
-                <div class="product-price">Price: {{ product.price | appCurrency:product.currency }}</div>
-            </div>
-            <div class="product-detail-action-bar">
-                <a (click)="back()" mat-button color="accent" class="product-detail-action-back">Back</a>
-                <button (click)="addToCart()" mat-raised-button color="primary" class="product-detail-action-add">Add To Cart</button>
-            </div>
-        </div>
+  <div style="display: flex">
+    <div>
+      <div class="product-image-container">
+        <img [src]="product.img" />
+        <!-- <div class="product-image" [ngStyle]="{ 'background-image': 'url(' + product.img +')'}"></div> -->
+      </div>
     </div>
+    <div>
+      <div>
+        <div class="mat-title">{{ product.name }}</div>
+        <div class="product-price">Price: {{ product.price | appCurrency: product.currency }}</div>
+      </div>
+      <div class="product-detail-action-bar">
+        <a (click)="back()" mat-button color="accent" class="product-detail-action-back">Back</a>
+        <button
+          (click)="addToCart()"
+          mat-raised-button
+          color="primary"
+          class="product-detail-action-add"
+        >
+          Add To Cart
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

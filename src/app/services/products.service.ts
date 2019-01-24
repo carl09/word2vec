@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { createSelector, MemoizedSelector, select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
 import { IProduct, IProductSummary, IProductViewed, IUser } from './models';
 import { convertCurrency, currencyTypes, DEFAULT_CURRENCY } from './models/currency.models';
 import { LoadProductsAction, ViewedProductAction } from './reducers/actions';
 import { IState } from './reducers/reducers';
+import { ResolverService } from './resolver.service';
 import { selectGetCurrency } from './user.service';
 
 const selectUser = (state: IState) => state.user;
@@ -86,10 +86,14 @@ const selectProductsRecent: MemoizedSelector<IState, IProductViewed[]> = createS
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor(private store: Store<IState>, private http: HttpClient) {}
+  constructor(
+    private store: Store<IState>,
+    private http: HttpClient,
+    private resolverService: ResolverService,
+  ) {}
 
   public loadProducts() {
-    this.http.get<IProduct[]>(`${environment.hostUrl}product`).subscribe((resp: IProduct[]) => {
+    this.http.get<IProduct[]>(this.resolverService.productsList()).subscribe((resp: IProduct[]) => {
       this.store.dispatch(
         new LoadProductsAction({
           products: resp,

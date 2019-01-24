@@ -74,6 +74,13 @@ const selectCartSummary: MemoizedSelector<IState, ICartSummary[]> = createSelect
   },
 );
 
+const selectCartItemsCode: MemoizedSelector<IState, string[]> = createSelector(
+  selectCart,
+  (cart: ICart) => {
+    return cart.items.map(x => x.productCode);
+  },
+);
+
 @Injectable({
   providedIn: 'root',
 })
@@ -86,5 +93,9 @@ export class CartService {
 
   public getCartSummary(): Observable<ICartSummary[]> {
     return this.store.pipe(select(selectCartSummary));
+  }
+
+  public getCartCodes(): Observable<string[]> {
+    return this.store.pipe(select(selectCartItemsCode));
   }
 }

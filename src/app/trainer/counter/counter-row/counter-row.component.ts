@@ -20,7 +20,7 @@ export class CounterRowComponent implements OnInit {
   constructor(private predictionService: PredictionService) {}
 
   ngOnInit(): void {
-    this.guesses$ = this.predictionService.guess(this.code);
+    this.guesses$ = this.predictionService.guess(3, this.code);
     this.suggest$ = this.predictionService.remoteSuggest(this.code);
   }
 }

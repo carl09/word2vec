@@ -11,9 +11,6 @@ export const createModelWithParms = (
   const hidden = tf.layers.dense({
     units: 1,
     inputShape: [encodeNumberLength],
-    // activation: 'relu', // 'relu',
-    //   activation: 'softmax',
-    // activation: 'sigmoid',
     activation,
     kernelInitializer: 'zeros',
     useBias: true,
@@ -53,9 +50,6 @@ export const createModelWithParms = (
   }
 
   model.compile({
-    // loss: 'meanSquaredError',
-    // optimizer: modelOptimizer,
-    // metrics: ['accuracy'],
     loss: 'categoricalCrossentropy',
     optimizer,
   });
@@ -113,3 +107,24 @@ export const createModel = (encodeNumberLength: number): tf.Sequential => {
 //   { name: 'Run: selu : 0.5 : adamax', loss: 2.7198612689971924 },
 //   { name: 'Run: selu : 0.5 : adam', loss: 2.722872495651245 },
 //   { name: 'Run: tanh : 0.05 : adam', loss: 2.729630470275879 },
+
+// const wordsCount: number = 5;
+
+// const model = tf.sequential();
+
+// model.add(tf.layers.dense({
+//     units: 1,
+//     inputShape: [wordsCount],
+//     activation: 'sigmoid',
+//     useBias: true,
+//   }));
+
+// model.add(tf.layers.dense({
+//     units: wordsCount,
+//     activation: 'softmax',
+//   }));
+
+// model.compile({
+//   loss: 'meanSquaredError',
+//   optimizer: tf.train.sgd(0.5),
+// });
