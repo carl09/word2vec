@@ -293,5 +293,14 @@
       { "productCode": "female-road-top-1", "qty": 1 },
       { "productCode": "female-road-top-2", "qty": 1 }
     ]
+  },
+  {
+    "sex": "male",
+    "style": "road",
+    "products": [
+      { "productCode": "road-chainset", "qty": 1 },
+      { "productCode": "road-rear-derailleur", "qty": 1 },
+      { "productCode": "chain", "qty": 1 }
+    ]
   }
 ]
