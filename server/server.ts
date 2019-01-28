@@ -56,4 +56,4 @@ app.post('/cartData', async (req, res) => {
 
 app.use('/assets', express.static('./server/assets/'));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Server listening on port ${port}!`));

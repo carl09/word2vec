@@ -59,8 +59,6 @@ export class PredictionService {
     itemsCount: number,
     ...code: string[]
   ): Observable<Array<{ label: string; img: string; name: string; rank: number }>> {
-    console.log('PredictionService.guess', code);
-
     return combineLatest(this.model(), this.productsService.getProductRaw()).pipe(
       map(([model, productsData]: [tf.Model, IProduct[]]) => {
         const product2int: { [id: string]: number } = productsData.reduce((a, w, i) => {
@@ -120,7 +118,6 @@ export class PredictionService {
   }
 
   private model() {
-    console.log('PredictionService.model');
     if (!this.model$) {
       this.model$ = this.requestModel().pipe(shareReplay(1));
     }
@@ -128,7 +125,6 @@ export class PredictionService {
   }
 
   private requestModel(): Observable<tf.Model> {
-    console.log('PredictionService.requestModel');
     return Observable.create(obs => {
       this.resolverService
         .getModel()

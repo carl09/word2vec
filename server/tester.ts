@@ -1,9 +1,14 @@
 import * as tf from '@tensorflow/tfjs';
-import { removeStopWords, getUniqueWords, TrainData, generateTrainingData } from '../src/app/data/utils';
 import { createModel } from '../src/app/data/model';
-require('@tensorflow/tfjs-node');
+import {
+  generateTrainingData,
+  getUniqueWords,
+  removeStopWords,
+  TrainData,
+} from '../src/app/data/utils';
 
-const WINDOW_SIZE = 2;
+// tslint:disable-next-line:no-var-requires
+require('@tensorflow/tfjs-node');
 
 const data = [
   'king is a strong man',
@@ -99,11 +104,11 @@ model
     shuffle: false,
     // batchSize: 32,
     validationSplit: 0.15,
-    callbacks: {
-      onEpochEnd: async (epoch, logs) => {
-        // console.log(epoch, logs.loss);
-      },
-    },
+    // callbacks: {
+    //   onEpochEnd: async (epoch, logs) => {
+    //     // console.log(epoch, logs.loss);
+    //   },
+    // },
   })
   .then(() => {
     // console.log(model.toJSON())

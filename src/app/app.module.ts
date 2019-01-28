@@ -72,12 +72,7 @@ export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IState>>('Regi
     MatTableModule,
     CdkTableModule,
   ],
-  providers: [
-    // ProductsService,
-    { provide: REDUCERS_TOKEN, useValue: reducers },
-    // UserService,
-    // CartService,
-  ],
+  providers: [{ provide: REDUCERS_TOKEN, useValue: reducers }],
   bootstrap: [AppComponent],
 })
 export class AppModule {
