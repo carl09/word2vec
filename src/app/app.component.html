@@ -1,20 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a routerLink="products" class="site-heading">NGRX</a>
+    <a routerLink="products" class="site-heading">My Bike Store</a>
     <span class="example-spacer"></span>
 
-    <a class="site-currency-total" routerLink="cart">Total {{ cartTotal$ | async | appCurrency:selected }}</a>
+    <a class="site-currency-total" routerLink="cart"
+      >Total {{ cartTotal$ | async | appCurrency: selected }}</a
+    >
 
     <mat-form-field class="site-currency-select">
       <mat-select [(value)]="selected" (selectionChange)="onSelectionChange($event)">
-        <mat-option *ngFor="let c of currencies" [value]="c">
-          {{ c }}
-        </mat-option>
+        <mat-option *ngFor="let c of currencies" [value]="c"> {{ c }} </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <button *ngIf="isAuthencated$ | async" mat-icon-button [matMenuTriggerFor]="menu">
+    <button *ngIf="(isAuthencated$ | async)" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>perm_identity</mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false" yPosition="below">
@@ -24,7 +24,9 @@
       </a>
     </mat-menu>
     <!-- <mat-icon class="example-icon">delete</mat-icon> -->
-    <a *ngIf="!(isAuthencated$ | async)" mat-raised-button color="accent" routerLink="user/login">Login</a>
+    <a *ngIf="!(isAuthencated$ | async)" mat-raised-button color="accent" routerLink="user/login"
+      >Login</a
+    >
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
