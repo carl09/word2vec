@@ -46,3 +46,10 @@ export interface ICartSave {
     qty: number;
   }>;
 }
+
+export interface IGuessRank {
+  label: string;
+  img: string;
+  name: string;
+  rank: number;
+}

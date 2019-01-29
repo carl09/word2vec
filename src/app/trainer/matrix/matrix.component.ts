@@ -6,7 +6,6 @@ import { PredictionService } from './../../services/prediction.service';
 @Component({
   selector: 'app-matrix',
   templateUrl: './matrix.component.html',
-  // styleUrls: ['./trainer.component.scss'],
 })
 export class MatrixComponent implements OnInit {
   @ViewChild('canvas1')
@@ -29,7 +28,7 @@ export class MatrixComponent implements OnInit {
           text: 'accuracy curve',
         },
         legend: {
-          // display: false,
+          display: false,
         },
         scales: {
           xAxes: [
