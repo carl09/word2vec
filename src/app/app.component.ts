@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartService } from './services/cart.service';

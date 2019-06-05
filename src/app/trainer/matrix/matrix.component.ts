@@ -8,7 +8,7 @@ import { PredictionService } from './../../services/prediction.service';
   templateUrl: './matrix.component.html',
 })
 export class MatrixComponent implements OnInit {
-  @ViewChild('canvas1')
+  @ViewChild('canvas1', { static: true })
   canvas1: ElementRef;
 
   public chart1: Chart;
