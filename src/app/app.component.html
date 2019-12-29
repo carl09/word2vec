@@ -14,7 +14,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button *ngIf="(isAuthencated$ | async)" mat-icon-button [matMenuTriggerFor]="menu">
+    <button *ngIf="isAuthencated$ | async" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>perm_identity</mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false" yPosition="below">
@@ -24,7 +24,11 @@
       </a>
     </mat-menu>
     <!-- <mat-icon class="example-icon">delete</mat-icon> -->
-    <a *ngIf="!(isAuthencated$ | async)" mat-raised-button color="accent" routerLink="user/login"
+    <a
+      *ngIf="(isAuthencated$ | async) === false"
+      mat-raised-button
+      color="accent"
+      routerLink="user/login"
       >Login</a
     >
   </mat-toolbar-row>

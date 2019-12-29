@@ -1,14 +1,17 @@
-import * as tf from '@tensorflow/tfjs';
+import { layers, Optimizer, Sequential, sequential, train } from '@tensorflow/tfjs';
+import { ActivationIdentifier } from '@tensorflow/tfjs-layers/dist/keras_format/activation_config';
+
+// import * as tf from '@tensorflow/tfjs';
 
 export const createModelWithParms = (
   encodeNumberLength: number,
-  activation: string,
+  activation: ActivationIdentifier,
   loss: number,
   optimizerName: string,
-): tf.Sequential => {
-  const model = tf.sequential();
+): Sequential => {
+  const model = sequential();
 
-  const hidden = tf.layers.dense({
+  const hidden = layers.dense({
     units: 1,
     inputShape: [encodeNumberLength],
     activation,
@@ -18,34 +21,34 @@ export const createModelWithParms = (
 
   model.add(hidden);
 
-  const output = tf.layers.dense({
+  const output = layers.dense({
     units: encodeNumberLength,
     activation: 'softmax',
   });
   model.add(output);
 
-  let optimizer: tf.Optimizer;
+  let optimizer: Optimizer;
   switch (optimizerName) {
     case 'sgd':
-      optimizer = tf.train.sgd(loss);
+      optimizer = train.sgd(loss);
       break;
     case 'momentum':
-      optimizer = tf.train.momentum(loss, 1);
+      optimizer = train.momentum(loss, 1);
       break;
     case 'rmsprop':
-      optimizer = tf.train.rmsprop(loss);
+      optimizer = train.rmsprop(loss);
       break;
     case 'adam':
-      optimizer = tf.train.adam(loss);
+      optimizer = train.adam(loss);
       break;
     case 'adadelta':
-      optimizer = tf.train.adadelta(loss);
+      optimizer = train.adadelta(loss);
       break;
     case 'adamax':
-      optimizer = tf.train.adamax(loss);
+      optimizer = train.adamax(loss);
       break;
     case 'adagrad':
-      optimizer = tf.train.adagrad(loss);
+      optimizer = train.adagrad(loss);
       break;
   }
 
@@ -57,7 +60,7 @@ export const createModelWithParms = (
   return model;
 };
 
-export const createModel = (encodeNumberLength: number): tf.Sequential => {
+export const createModel = (encodeNumberLength: number): Sequential => {
   // return createModelWithParms(encodeNumberLength, 'sigmoid', 0.005, 'rmsprop');
   return createModelWithParms(encodeNumberLength, 'linear', 0.5, 'adamax');
 };

@@ -79,7 +79,12 @@ const p = productsData as IProduct[];
 generateModel(
   p,
   cartItemsData as ICartSave[],
-  createModelWithParms(p.length, 'linear', 0.015, 'adamax'),
+  createModelWithParms({
+    encodeNumberLength: p.length,
+    activation: 'linear',
+    loss: 0.015,
+    optimizerName: 'adamax',
+  }),
   300,
 );
 
@@ -93,7 +98,12 @@ async function doIt(parms: IHyperParm[]): Promise<ITrainResult[]> {
     const result = await generateModel(
       products,
       cartItemsData as ICartSave[],
-      createModelWithParms(products.length, i.activation, i.loss, i.optimizer),
+      createModelWithParms({
+        encodeNumberLength: products.length,
+        activation: i.activation,
+        loss: i.loss,
+        optimizerName: i.optimizer,
+      }),
       500,
     );
     console.log(`Run: ${i.activation} : ${i.loss} : ${i.optimizer}`, result);

@@ -27,7 +27,7 @@ export const removeStopWords = (line: string): string => {
 };
 
 export const getUniqueWords = (lines: string[]): string[] => {
-  const wordSet = new Set();
+  const wordSet = new Set<string>();
 
   lines.forEach(l => l.split(' ').forEach(w => wordSet.add(w)));
 

@@ -7,7 +7,7 @@ import { ICartSave, IGuessRank, IProduct } from './models';
 import { ProductsService } from './products.service';
 import { ResolverService } from './resolver.service';
 
-const predict = (model: tf.Model, productLength: number) => {
+const predict = (model: tf.LayersModel, productLength: number) => {
   return (productId: number) => {
     let result: number[];
     tf.tidy(() => {
@@ -24,7 +24,7 @@ const predict = (model: tf.Model, productLength: number) => {
   providedIn: 'root',
 })
 export class PredictionService {
-  private model$: Observable<tf.Model>;
+  private model$: Observable<tf.LayersModel>;
 
   constructor(
     private productsService: ProductsService,
@@ -34,7 +34,7 @@ export class PredictionService {
 
   public guess(numberOfItemsToReturn: number, ...productCodes: string[]): Observable<IGuessRank[]> {
     return combineLatest(this.tensorflowModel(), this.productsService.getProductRaw()).pipe(
-      map(([model, productsData]: [tf.Model, IProduct[]]) => {
+      map(([model, productsData]: [tf.LayersModel, IProduct[]]) => {
         // Create lookup for product code to index lookup
         const product2int: { [id: string]: number } = productsData.reduce((a, w, i) => {
           a[w.code] = i;
@@ -134,7 +134,7 @@ export class PredictionService {
     return this.model$;
   }
 
-  private requestModel(): Observable<tf.Model> {
+  private requestModel(): Observable<tf.LayersModel> {
     return Observable.create(obs => {
       this.resolverService
         .getModel()
